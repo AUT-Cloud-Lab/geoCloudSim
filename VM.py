@@ -2,13 +2,11 @@ class VM:
     """
     Represents a Virtual Machine (VM) that runs inside a Host, sharing host resources with other VMs
     """
-    def __init__(self, vm_id, user_id, mips, number_of_pes,
-                 ram, bw, storage, vmm):
+    def __init__(self, vm_id, user_id, mips, ram, bw, storage, vmm):
         self._vm_id = vm_id
         self._user_id = user_id
         self._vm_uid = user_id + '-' + vm_id
         self._mips = mips
-        self._number_of_pes = number_of_pes
         self._ram = ram
         self._bw = bw
         self._storage = storage
@@ -42,12 +40,6 @@ class VM:
 
     def set_mips(self, mips):
         self._mips = mips
-
-    def get_number_of_pes(self):
-        return self._number_of_pes
-
-    def set_number_of_pes(self, number_of_pes):
-        self._number_of_pes = number_of_pes
 
     def get_ram(self):
         return self._ram
