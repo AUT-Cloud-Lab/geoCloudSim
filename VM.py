@@ -5,7 +5,7 @@ class VM:
     def __init__(self, vm_id, user_id, mips, ram, bw, storage, vmm):
         self._vm_id = vm_id
         self._user_id = user_id
-        self._vm_uid = user_id + '-' + vm_id
+        self._vm_uid = str(user_id) + '-' + str(vm_id)
         self._mips = mips
         self._ram = ram
         self._bw = bw
