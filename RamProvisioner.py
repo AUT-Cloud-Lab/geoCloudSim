@@ -38,7 +38,7 @@ class RamProvisioner:
 
     def is_suitable_for_vm(self, vm, ram):
         allocated_ram = self.get_allocated_ram_for_vm(vm)
-        result = self.allocate_ram_for_vm(vm)
+        result = self.allocate_ram_for_vm(vm, ram)
         self.deallocate_ram_for_vm(vm)
         if allocated_ram > 0:
             self.allocate_ram_for_vm(vm, allocated_ram)

@@ -36,7 +36,7 @@ class MipsProvisioner:
 
     def is_suitable_for_vm(self, vm, mips):
         allocated_mips = self.get_allocated_mips_for_vm(vm)
-        result = self.allocate_mips_for_vm(vm)
+        result = self.allocate_mips_for_vm(vm, mips)
         self.deallocate_mips_for_vm(vm)
         if allocated_mips > 0:
             self.allocate_mips_for_vm(vm, allocated_mips)

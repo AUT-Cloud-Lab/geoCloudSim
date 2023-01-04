@@ -2,7 +2,7 @@ class VM:
     """
     Represents a Virtual Machine (VM) that runs inside a Host, sharing host resources with other VMs
     """
-    def __init__(self, vm_id, user_id, mips, ram, bw, storage, vmm):
+    def __init__(self, vm_id, user_id, mips, ram, bw, storage, vmm, arrival_time, duration):
         self._vm_id = vm_id
         self._user_id = user_id
         self._vm_uid = str(user_id) + '-' + str(vm_id)
@@ -11,16 +11,18 @@ class VM:
         self._bw = bw
         self._storage = storage
         self._vmm = vmm
+        self._arrival_time = arrival_time
+        self._duration = duration
         self._current_allocated_bw = 0
         self._current_allocated_mips = None
         self._current_allocated_ram = 0
         self._current_allocated_storage = 0
         self._host = None
 
-    def get_vm_id(self):
+    def get_id(self):
         return self._vm_id
 
-    def set_vm_id(self, vm_id):
+    def set_id(self, vm_id):
         self._vm_id = vm_id
 
     def get_vm_uid(self):
@@ -94,3 +96,10 @@ class VM:
 
     def set_host(self, host):
         self._host = host
+
+    def get_arrival_time(self):
+        return self._arrival_time
+
+    def get_duration(self):
+        return self._duration
+

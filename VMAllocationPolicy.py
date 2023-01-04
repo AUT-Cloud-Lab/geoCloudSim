@@ -3,14 +3,10 @@ from abc import ABC, abstractmethod
 
 class VMAllocationPolicy(ABC):
     def __init__(self, host_list):
-        self.__host_list = host_list
+        self._host_list = host_list
 
     @abstractmethod
     def allocate_host_for_vm(self, vm):
-        pass
-
-    @abstractmethod
-    def allocate_host_for_vm(self, vm, host):
         pass
 
     @abstractmethod

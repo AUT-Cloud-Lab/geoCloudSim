@@ -36,7 +36,7 @@ class BwProvisioner:
 
     def is_suitable_for_vm(self, vm, bw):
         allocated_bw = self.get_allocated_bw_for_vm(vm)
-        result = self.allocate_bw_for_vm(vm)
+        result = self.allocate_bw_for_vm(vm, bw)
         self.deallocate_bw_for_vm(vm)
         if allocated_bw > 0:
             self.allocate_bw_for_vm(vm, allocated_bw)

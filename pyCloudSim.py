@@ -15,9 +15,9 @@ class PyCloudSim(object):
         self._broker = broker
         self._datacenter_list = datacenter_list
         self._vm_list = vm_list
-        self._env.process(self._broker.start_run(self._env))
-        for dc in self._datacenter_list:
-            self._env.process(dc.start_run(self._env))
+        self._env.process(self._broker.start_run(self._env, sim_time))
+        #for dc in self._datacenter_list:
+          #  self._env.process(dc.start_run(self._env, sim_time))
 
     def get_sim_time(self):
         return self._sim_time

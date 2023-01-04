@@ -1,6 +1,11 @@
+import simpy
+from simpy.util import start_delayed
+
+
 class Datacenter:
     def __init__(self, dc_id, datacenter_attributes, vm_allocation_policy, scheduling_interval, host_list):
         self._env = None
+        self._sim_time = None
         self._arch = datacenter_attributes['arch']
         self._os = datacenter_attributes['os']
         self._vmm = datacenter_attributes['vmm']
@@ -21,11 +26,39 @@ class Datacenter:
         for host in self._host_list:
             host.set_datacenter(self)
 
-    def start_run(self, env):
+    def start_run(self, env, sim_time):
         self._env = env
+        self._sim_time = sim_time
         print('datacenter started')
-        yield env.timeout(1)
+        # yield env.timeout(1)
         print('datacenter stopped')
 
     def set_cloud(self, cloud):
         self._cloud = cloud
+
+    def run(self):
+        while True:
+            try:
+                print('dc running')
+                yield self._env.timeout(self._sim_time - self._env.now - 10)
+                print('dc stopped')
+            except simpy.Interrupt:
+                print('What?!')
+                break
+
+    def process_vm_create(self, env, vm):
+        print(f'vm creation request for vm_id = {vm.get_id()} received at {env.now}')
+        result = self._vm_allocation_policy.allocate_host_for_vm(vm)
+        if result:
+            print(f'vm with vm_id = {vm.get_id()} created and allocated to host_id = {vm.get_host().get_id()} of '
+                  f'datacenter_id = {self._datacenter_id} at {env.now}')
+            start_delayed(env, self.process_vm_destroy(env, vm), delay=vm.get_duration())
+        else:
+            print(f'vm with vm_id = {vm.get_id()} not created')
+        yield env.timeout(0)
+
+    def process_vm_destroy(self, env, vm):
+        print(f'vm destroy request for vm_id = {vm.get_id()} received at {env.now}')
+        self._vm_allocation_policy.deallocate_host_for_vm(vm)
+        print(f'vm with vm_id = {vm.get_id()} destroyed at {env.now}')
+        yield env.timeout(0)

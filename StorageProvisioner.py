@@ -36,7 +36,7 @@ class StorageProvisioner:
 
     def is_suitable_for_vm(self, vm, storage):
         allocated_storage = self.get_allocated_storage_for_vm(vm)
-        result = self.allocate_storage_for_vm(vm)
+        result = self.allocate_storage_for_vm(vm, storage)
         self.deallocate_storage_for_vm(vm)
         if allocated_storage > 0:
             self.allocate_storage_for_vm(vm, allocated_storage)

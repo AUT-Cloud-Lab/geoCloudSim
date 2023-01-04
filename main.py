@@ -10,9 +10,10 @@ from StorageProvisioner import StorageProvisioner
 from VMAllocationPolicyLeastMips import VMAllocationPolicyLeastMips
 from VMCloudAllocationPolicy import VMCloudAllocationPolicy
 from Datacenter import Datacenter
-from DatacenterBroker import DatacenterBroker
+from Broker import Broker
 from Cloud import Cloud
 from VM import VM
+from csv import DictReader
 
 
 def create_vms():
@@ -30,6 +31,14 @@ def create_vms():
         vm_list.append(VM(vm_id, user_id, mips, ram, bw, storage, vmm))
     return vm_list
 
+def create_vms_from_file():
+    vm_list = []
+    with open('vms.csv', mode='r') as vm_file:
+        vm_dict = DictReader(vm_file)
+        for row in vm_dict:
+            vm_list.append(VM(row['vm_id'], row['user_id'], float(row['mips']), float(row['ram']), float(row['bw']),
+                              float(row['storage']), row['vmm'], float(row['arrival_time']), float(row['duration'])))
+    return vm_list
 
 def create_datacenter():
     host_list = []
@@ -41,7 +50,7 @@ def create_datacenter():
     mips = 1000  # host MIPS
     ram = 2048  # host memory(MB)
     storage = 1000000  # host storage (MB)
-    bw = 10000  # host network bandwidth (MB/s)
+    bw = 10000000  # host network bandwidth (MB/s)
     ram_provisioner = RamProvisioner(ram)
     mips_provisioner = MipsProvisioner(mips)
     storage_provisioner = StorageProvisioner(storage)
@@ -57,8 +66,8 @@ def create_datacenter():
     return dc_list
 
 
-def create_broker():
-    return DatacenterBroker()
+def create_broker(cloud):
+    return Broker(cloud)
 
 
 def create_cloud(dc_list):
@@ -79,14 +88,14 @@ if __name__ == '__main__':
     cloud = create_cloud(datacenters)
 
     # 2) Create VM(s)
-    vms = create_vms()
+    vms = create_vms_from_file()
 
     # 3) Create a Broker and submit VMs to it
-    broker = create_broker()
+    broker = create_broker(cloud)
     broker.submit_vm_list(vms)
 
     # 4) Create and Initialize Simulation environment and processes
-    sim_time = 100
+    sim_time = 10000
     sim = PyCloudSim(sim_time, broker, datacenters, vms)
 
     # 5) Initialize and Start the simulation

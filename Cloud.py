@@ -16,3 +16,6 @@ class Cloud:
         print('cloud started')
         yield env.timeout(1)
         print('cloud stopped')
+
+    def get_dc_list(self):
+        return self._dc_list

@@ -22,39 +22,39 @@ class Host:
         return min(current_time)
 
     def is_suitable_for_vm(self, vm):
-        return self.get_mips_provisioner().is_suitable_for_vm(vm, vm.get_current_requested_mips()) and \
-               self.get_storage_provisioner().is_suitable_for_vm(vm, vm.get_current_requested_storage()) and \
-               self.get_ram_provisioner().is_suitable_for_vm(vm, vm.get_current_requested_ram()) and \
-               self.get_bw_provisioner().is_suitable_for_vm(vm, vm.get_current_requested_bw())
+        return self.get_mips_provisioner().is_suitable_for_vm(vm, vm.get_mips()) and \
+               self.get_storage_provisioner().is_suitable_for_vm(vm, vm.get_storage()) and \
+               self.get_ram_provisioner().is_suitable_for_vm(vm, vm.get_ram()) and \
+               self.get_bw_provisioner().is_suitable_for_vm(vm, vm.get_bw())
 
     def vm_create(self, vm):
-        if not self.get_bw_provisioner().allocate_bw_for_vm(vm, vm.get_current_requested_bw()):
-            print(f'Allocation of VM # {vm.get_vm_id()} to Host # {self.get_host_id()} failed by BW')
+        if not self.get_bw_provisioner().allocate_bw_for_vm(vm, vm.get_bw()):
+            print(f'Allocation of VM # {vm.get_vm_id()} to Host # {self.get_id()} failed by BW')
             return False
-        if not self.get_ram_provisioner().allocate_ram_for_vm(vm, vm.get_current_requested_ram()):
-            print(f'Allocation of VM # {vm.get_vm_id()} to Host # {self.get_host_id()} failed by RAM')
+        if not self.get_ram_provisioner().allocate_ram_for_vm(vm, vm.get_ram()):
+            print(f'Allocation of VM # {vm.get_vm_id()} to Host # {self.get_id()} failed by RAM')
             self.get_bw_provisioner().deallocate_bw_for_vm(vm)
             return False
-        if not self.get_mips_provisioner().allocate_mips_for_vm(vm, vm.get_current_requested_mips()):
-            print(f'Allocation of VM # {vm.get_vm_id()} to Host # {self.get_host_id()} failed by MIPS')
+        if not self.get_mips_provisioner().allocate_mips_for_vm(vm, vm.get_mips()):
+            print(f'Allocation of VM # {vm.get_vm_id()} to Host # {self.get_id()} failed by MIPS')
             self.get_bw_provisioner().deallocate_bw_for_vm(vm)
             self.get_ram_provisioner().deallocate_ram_for_vm(vm)
             return False
-        if not self.get_storage_provisioner().allocate_storage_for_vm(vm, vm.get_current_requested_storage()):
-            print(f'Allocation of VM # {vm.get_vm_id()} to Host # {self.get_host_id()} failed by Storage')
+        if not self.get_storage_provisioner().allocate_storage_for_vm(vm, vm.get_storage()):
+            print(f'Allocation of VM # {vm.get_vm_id()} to Host # {self.get_id()} failed by Storage')
             self.get_bw_provisioner().deallocate_bw_for_vm(vm)
             self.get_ram_provisioner().deallocate_ram_for_vm(vm)
             self.get_mips_provisioner().deallocate_mips_for_vm(vm)
             return False
 
-        self.set_vm_list(self.get_vm_list().append(vm))
+        self._vm_list.append(vm)
         vm.set_host(self)
         return True
 
     def vm_destroy(self, vm):
         if vm is not None:
             self.vm_deallocate(vm)
-            self.set_vm_list(self.get_vm_list().remove(vm))
+            self._vm_list.remove(vm)
             vm.set_host(None)
 
     def vm_destroy_all(self):
@@ -105,10 +105,10 @@ class Host:
     def get_available_storage(self):
         return self.get_storage_provisioner().get_available_storage()
 
-    def get_host_id(self):
+    def get_id(self):
         return self._host_id
 
-    def set_host_id(self, host_id):
+    def set_id(self, host_id):
         self._host_id = host_id
 
     def get_ram_provisioner(self):
