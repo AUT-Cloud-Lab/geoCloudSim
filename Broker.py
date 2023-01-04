@@ -1,6 +1,6 @@
 """
 Title:          PyCloudSim
-Description:    A Python-based Cloud Simulation framework
+Description:    A Python-based Cloud Simulator
 Author(s):      Mahmoud Momtazpour
 Licence:        GPL - https://www.gnu.org/copyleft/gpl.html
 Copyright (c) 2022-2023, Amirkabir University of Technology, Iran
@@ -12,8 +12,8 @@ import logging
 
 
 class Broker:
-    """ Broker class definition: It is responsible for managing VMs (creation, submission, destruction) on behalf of
-    users
+    """ Broker class definition: It is responsible for sending VMs request (creation, submission, destruction) to Cloud
+    on behalf of users.
     :ivar _sim_time: simulation time
     :type _sim_time: int
     :ivar _env: simulation environment
@@ -38,6 +38,9 @@ class Broker:
     :type _cloud: Cloud
     """
     def __init__(self, cloud):
+        """ Constructor
+        :param cloud: the cloud instance that includes all datacenters
+        """
         self._sim_time = None
         self._env = None
         self._vm_list = []
@@ -52,9 +55,16 @@ class Broker:
         # self._datacenter_characteristics_map = dict()
 
     def submit_vm_list(self, vm_list):
+        """ Submit the list of VMs to the broker
+        :param vm_list: list of VMs
+        """
         [self._vm_list.append(vm) for vm in vm_list]
 
     def start_run(self, env, sim_time):
+        """Start the broker event processor
+        :param env: the simulation environment
+        :param sim_time: the simulation duration
+        """
         self._env = env
         self._sim_time = sim_time
         logging.info(f'Broker started at {env.now}.')
@@ -69,19 +79,13 @@ class Broker:
         logging.info(f'Broker stopped at {env.now}.')
 
     def send_request(self, env, request):
+        """ Sending request (VM creation, etc.) to Cloud/Datacenters
+        :param env: the simulation environment
+        :param request:  a dictionary containing the request type, destination, etc.
+        """
         if request['type'] == 'vm_create':
             dc = request['dc']
             vm = request['vm']
-            logging.info(f'VM request with vm_id = {vm.get_id()} sent at {env.now}.')
+            logging.info(f'VM creation request with vm_id = {vm.get_id()} sent at {env.now}.')
             yield env.process(dc.process_vm_create(env, vm))
-            logging.info(f'VM request with vm_id = {vm.get_id()} completed at {env.now}.')
-
-    def run(self):
-        while True:
-            try:
-                yield self._env.timeout(self._sim_time - self._env.now)
-            except simpy.Interrupt:
-                print('What?!')
-
-    def process_event(self, event):
-        pass
+            logging.info(f'VM creation request with vm_id = {vm.get_id()} completed at {env.now}.')

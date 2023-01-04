@@ -1,6 +1,6 @@
 """
 Title:          PyCloudSim
-Description:    A Python-based Cloud Simulation framework
+Description:    A Python-based Cloud Simulator
 Author(s):      Mahmoud Momtazpour
 Licence:        GPL - https://www.gnu.org/copyleft/gpl.html
 Copyright (c) 2022-2023, Amirkabir University of Technology, Iran
@@ -14,7 +14,7 @@ from MipsProvisioner import MipsProvisioner
 from StorageProvisioner import StorageProvisioner
 from VMAllocationPolicyFirstFit import VMAllocationPolicyFirstFit
 from VMAllocationPolicyLeastMips import VMAllocationPolicyLeastMips
-from VMCloudAllocationPolicy import VMCloudAllocationPolicy
+from DCSelectionPolicy import DCSelectionPolicy
 from Datacenter import Datacenter
 from Broker import Broker
 from Cloud import Cloud
@@ -73,7 +73,7 @@ def create_datacenter() -> list[Datacenter]:
     """
     host_list = []
     dc_list = []
-    num_hosts = 4
+    num_hosts = 2
     num_dcs = 1
     logging.info(f'Creating {num_dcs} datacenters, each with {num_hosts} hosts.')
     # adding some homogeneous hosts
@@ -115,9 +115,9 @@ def create_cloud(dc_list: list[Datacenter]) -> Cloud:
     :rtype: Cloud
     """
     logging.info(f'Creating the cloud.')
-    cloud_attributes = {'name': 'my_cloud', 'cloud_id': 1}
-    vm_cloud_allocation_policy = VMCloudAllocationPolicy(dc_list)
-    return Cloud(cloud_attributes, dc_list, vm_cloud_allocation_policy)
+    cloud_attributes = {'cloud_id': 1}
+    dc_selection_policy = DCSelectionPolicy(dc_list)
+    return Cloud(cloud_attributes, dc_list, dc_selection_policy)
 
 
 def print_hi():

@@ -1,6 +1,6 @@
 """
 Title:          PyCloudSim
-Description:    A Python-based Cloud Simulation framework
+Description:    A Python-based Cloud Simulator
 Author(s):      Mahmoud Momtazpour
 Licence:        GPL - https://www.gnu.org/copyleft/gpl.html
 Copyright (c) 2022-2023, Amirkabir University of Technology, Iran
@@ -8,6 +8,14 @@ Copyright (c) 2022-2023, Amirkabir University of Technology, Iran
 
 
 class RamProvisioner:
+    """ RamProvisioner class definition: It is responsible for provisioning host memory (RAM) for VMs
+    :ivar _ram: host total RAM
+    :type _ram: int
+    :ivar _available_ram: host available (i.e. remaining) RAM
+    :type _available_ram: int
+    :ivar _ram_table: mapping between VM_id and its allocated RAM
+    :type _ram_table: dict<vm_id, ram>
+    """
     def __init__(self, ram):
         self._ram = ram
         self._available_ram = ram

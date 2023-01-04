@@ -1,6 +1,6 @@
 """
 Title:          PyCloudSim
-Description:    A Python-based Cloud Simulation framework
+Description:    A Python-based Cloud Simulator
 Author(s):      Mahmoud Momtazpour
 Licence:        GPL - https://www.gnu.org/copyleft/gpl.html
 Copyright (c) 2022-2023, Amirkabir University of Technology, Iran
@@ -10,9 +10,22 @@ import math
 
 
 class Host:
-    """
-    A host (also called server) is a physical machine inside a data center that can host virtual machines (VMs).
-    It has defined policies for provisioning RAM, MIPS, Storage and BW for its VMs.
+    """ A host (server) is a physical machine inside a data center that can host virtual machines (VMs).
+    It provisions RAM, MIPS, Storage and BW for its VMs via its VM allocation policy
+    :ivar _host_id: id of host
+    :type _host_id: int
+    :ivar _ram_provisioner: an instance of RamProvisioner that handles provisioning of RAM to VMs
+    :type _ram_provisioner: RamProvisioner
+    :ivar _bw_provisioner: an instance of BwProvisioner that handles provisioning of bandwidth to VMs
+    :type _bw_provisioner: BwProvisioner
+    :ivar _storage_provisioner: an instance of StorageProvisioner that handles provisioning of storage to VMs
+    :type _storage_provisioner: StorageProvisioner
+    :ivar _mips_provisioner: an instance of MipsProvisioner that handles provisioning of mips to VMs
+    :type _mips_provisioner: MipsProvisioner
+    :ivar _vm_list: list of VMs allocated to this host
+    :type _vm_list: list[VM]
+    :ivar _datacenter: a datacenter instance that this host belongs to
+    :type _datacenter: Datacenter
     """
     def __init__(self, host_id, ram_provisioner, bw_provisioner, storage_provisioner, mips_provisioner):
         self._host_id = host_id

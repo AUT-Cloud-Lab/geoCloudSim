@@ -1,6 +1,6 @@
 """
 Title:          PyCloudSim
-Description:    A Python-based Cloud Simulation framework
+Description:    A Python-based Cloud Simulator
 Author(s):      Mahmoud Momtazpour
 Licence:        GPL - https://www.gnu.org/copyleft/gpl.html
 Copyright (c) 2022-2023, Amirkabir University of Technology, Iran
@@ -10,6 +10,10 @@ from abc import ABC, abstractmethod
 
 
 class VMAllocationPolicy(ABC):
+    """ VMAllocationPolicy class definition: It is responsible for allocate/deallocate a host for a VM
+        :ivar _host_list: a list of all hosts within a data center
+        :type _host_list: list[Host]
+    """
     def __init__(self, host_list):
         self._host_list = host_list
 

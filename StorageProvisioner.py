@@ -1,6 +1,6 @@
 """
 Title:          PyCloudSim
-Description:    A Python-based Cloud Simulation framework
+Description:    A Python-based Cloud Simulator
 Author(s):      Mahmoud Momtazpour
 Licence:        GPL - https://www.gnu.org/copyleft/gpl.html
 Copyright (c) 2022-2023, Amirkabir University of Technology, Iran
@@ -8,6 +8,14 @@ Copyright (c) 2022-2023, Amirkabir University of Technology, Iran
 
 
 class StorageProvisioner:
+    """ StorageProvisioner class definition: It is responsible for provisioning host storage for VMs
+    :ivar _storage: host total storage
+    :type _storage: int
+    :ivar _available_storage: host available (i.e. remaining) storage
+    :type _available_storage: int
+    :ivar _storage_table: mapping between VM_id and its allocated storage
+    :type _storage_table: dict<vm_id, storage>
+    """
     def __init__(self, storage):
         self._storage = storage
         self._available_storage = storage

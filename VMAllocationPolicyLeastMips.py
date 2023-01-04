@@ -1,6 +1,6 @@
 """
 Title:          PyCloudSim
-Description:    A Python-based Cloud Simulation framework
+Description:    A Python-based Cloud Simulator
 Author(s):      Mahmoud Momtazpour
 Licence:        GPL - https://www.gnu.org/copyleft/gpl.html
 Copyright (c) 2022-2023, Amirkabir University of Technology, Iran
@@ -11,8 +11,12 @@ from heapq import heappush, heappop
 
 
 class VMAllocationPolicyLeastMips(VMAllocationPolicy):
-    """
-    This policy tries to allocate a host with minimum available Mips
+    """ The VMAllocationPolicyLeastMips class definition: This policy tries to allocate a host with enough capacity,
+    but with the least Mips available for the VM
+    :ivar _host_list: a list of all hosts within a data center
+    :type _host_list: list[Host]
+    :ivar _vm_table: a dictionary that stores the mapping of VMs' UID to hosts
+    :type _vm_table: dict<str, Host>
     """
     def __init__(self, host_list):
         super().__init__(host_list)

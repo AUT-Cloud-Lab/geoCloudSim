@@ -1,6 +1,6 @@
 """
 Title:          PyCloudSim
-Description:    A Python-based Cloud Simulation framework
+Description:    A Python-based Cloud Simulator
 Author(s):      Mahmoud Momtazpour
 Licence:        GPL - https://www.gnu.org/copyleft/gpl.html
 Copyright (c) 2022-2023, Amirkabir University of Technology, Iran
@@ -10,8 +10,12 @@ from VMAllocationPolicy import VMAllocationPolicy
 
 
 class VMAllocationPolicyFirstFit(VMAllocationPolicy):
-    """
-    This policy tries to allocate the first host that have enough capacity for the VM
+    """ The VMAllocationPolicyFirstFit class definition: This policy tries to allocate the first host that has enough
+    capacity for the VM
+    :ivar _host_list: a list of all hosts within a data center
+    :type _host_list: list[Host]
+    :ivar _vm_table: a dictionary that stores the mapping of VMs' UID to hosts
+    :type _vm_table: dict<str, Host>
     """
     def __init__(self, host_list):
         super().__init__(host_list)

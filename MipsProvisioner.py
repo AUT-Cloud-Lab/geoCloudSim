@@ -1,6 +1,6 @@
 """
 Title:          PyCloudSim
-Description:    A Python-based Cloud Simulation framework
+Description:    A Python-based Cloud Simulator
 Author(s):      Mahmoud Momtazpour
 Licence:        GPL - https://www.gnu.org/copyleft/gpl.html
 Copyright (c) 2022-2023, Amirkabir University of Technology, Iran
@@ -8,6 +8,15 @@ Copyright (c) 2022-2023, Amirkabir University of Technology, Iran
 
 
 class MipsProvisioner:
+    """ MipsProvisioner class definition: It is responsible for provisioning host computing power (in terms of mips)
+    for VMs
+    :ivar _mips: host total mips
+    :type _mips: int
+    :ivar _available_mips: host available (i.e. remaining) mips
+    :type _available_mips: int
+    :ivar _mips_table: mapping between VM_id and its allocated mips
+    :type _mips_table: dict<vm_id, mips>
+    """
     def __init__(self, mips):
         self._mips = mips
         self._available_mips = mips
