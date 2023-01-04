@@ -1,3 +1,12 @@
+"""
+Title:          PyCloudSim
+Description:    A Python-based Cloud Simulation framework
+Author(s):      Mahmoud Momtazpour
+Licence:        GPL - https://www.gnu.org/copyleft/gpl.html
+Copyright (c) 2022-2023, Amirkabir University of Technology, Iran
+"""
+
+
 class DatacenterCharacteristics:
     def __init__(self, architecture, os, vmm, host_list, time_zone, cost_per_mips, cost_per_ram, cost_per_bw,
                  cost_per_storage, allocation_policy):

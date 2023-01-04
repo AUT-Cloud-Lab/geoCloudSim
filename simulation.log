@@ -1,0 +1,516 @@
+2023-01-04 14:11:16,665 - [INFO]: root - Initializing PyCloudSim...
+2023-01-04 14:11:16,666 - [INFO]: root - Creating 1 datacenters, each with 4 hosts.
+2023-01-04 14:11:16,667 - [INFO]: root - Creating the cloud.
+2023-01-04 14:11:16,667 - [INFO]: root - Importing VMs from file.
+2023-01-04 14:11:16,667 - [INFO]: root - Creating the broker.
+2023-01-04 14:11:16,667 - [INFO]: root - Creating PyCloudSim environment.
+2023-01-04 14:11:16,667 - [INFO]: root - Starting simulation.
+2023-01-04 14:11:16,667 - [INFO]: root - Broker started at 0.
+2023-01-04 14:11:16,667 - [INFO]: root - VM request with vm_id = 1 sent at 0.
+2023-01-04 14:11:16,667 - [INFO]: root - vm creation request for vm_id = 1 received at 0
+2023-01-04 14:11:16,668 - [INFO]: root - vm with vm_id = 1 created and allocated to host_id = 0 of datacenter_id = 0 at 0
+2023-01-04 14:11:16,668 - [INFO]: root - VM request with vm_id = 1 completed at 0.
+2023-01-04 14:11:16,668 - [INFO]: root - VM request with vm_id = 2 sent at 10.0.
+2023-01-04 14:11:16,668 - [INFO]: root - vm creation request for vm_id = 2 received at 10.0
+2023-01-04 14:11:16,668 - [INFO]: root - vm with vm_id = 2 created and allocated to host_id = 0 of datacenter_id = 0 at 10.0
+2023-01-04 14:11:16,669 - [INFO]: root - VM request with vm_id = 3 sent at 10.0.
+2023-01-04 14:11:16,669 - [INFO]: root - vm creation request for vm_id = 3 received at 10.0
+2023-01-04 14:11:16,669 - [INFO]: root - vm with vm_id = 3 created and allocated to host_id = 0 of datacenter_id = 0 at 10.0
+2023-01-04 14:11:16,669 - [INFO]: root - VM request with vm_id = 2 completed at 10.0.
+2023-01-04 14:11:16,669 - [INFO]: root - VM request with vm_id = 3 completed at 10.0.
+2023-01-04 14:11:16,669 - [INFO]: root - VM request with vm_id = 4 sent at 10.0.
+2023-01-04 14:11:16,669 - [INFO]: root - vm creation request for vm_id = 4 received at 10.0
+2023-01-04 14:11:16,669 - [INFO]: root - vm with vm_id = 4 created and allocated to host_id = 0 of datacenter_id = 0 at 10.0
+2023-01-04 14:11:16,669 - [INFO]: root - VM request with vm_id = 4 completed at 10.0.
+2023-01-04 14:11:16,670 - [INFO]: root - VM request with vm_id = 5 sent at 10.0.
+2023-01-04 14:11:16,670 - [INFO]: root - vm creation request for vm_id = 5 received at 10.0
+2023-01-04 14:11:16,670 - [INFO]: root - vm with vm_id = 5 created and allocated to host_id = 0 of datacenter_id = 0 at 10.0
+2023-01-04 14:11:16,670 - [INFO]: root - VM request with vm_id = 5 completed at 10.0.
+2023-01-04 14:11:16,670 - [INFO]: root - VM request with vm_id = 6 sent at 10.0.
+2023-01-04 14:11:16,670 - [INFO]: root - vm creation request for vm_id = 6 received at 10.0
+2023-01-04 14:11:16,670 - [INFO]: root - vm with vm_id = 6 created and allocated to host_id = 0 of datacenter_id = 0 at 10.0
+2023-01-04 14:11:16,670 - [INFO]: root - VM request with vm_id = 6 completed at 10.0.
+2023-01-04 14:11:16,670 - [INFO]: root - VM request with vm_id = 7 sent at 10.0.
+2023-01-04 14:11:16,670 - [INFO]: root - vm creation request for vm_id = 7 received at 10.0
+2023-01-04 14:11:16,671 - [INFO]: root - vm with vm_id = 7 created and allocated to host_id = 0 of datacenter_id = 0 at 10.0
+2023-01-04 14:11:16,671 - [INFO]: root - VM request with vm_id = 7 completed at 10.0.
+2023-01-04 14:11:16,671 - [INFO]: root - VM request with vm_id = 8 sent at 10.0.
+2023-01-04 14:11:16,671 - [INFO]: root - vm creation request for vm_id = 8 received at 10.0
+2023-01-04 14:11:16,671 - [INFO]: root - vm with vm_id = 8 created and allocated to host_id = 0 of datacenter_id = 0 at 10.0
+2023-01-04 14:11:16,671 - [INFO]: root - VM request with vm_id = 8 completed at 10.0.
+2023-01-04 14:11:16,671 - [INFO]: root - VM request with vm_id = 9 sent at 10.0.
+2023-01-04 14:11:16,671 - [INFO]: root - vm creation request for vm_id = 9 received at 10.0
+2023-01-04 14:11:16,671 - [INFO]: root - vm with vm_id = 9 created and allocated to host_id = 1 of datacenter_id = 0 at 10.0
+2023-01-04 14:11:16,672 - [INFO]: root - VM request with vm_id = 9 completed at 10.0.
+2023-01-04 14:11:16,672 - [INFO]: root - VM request with vm_id = 10 sent at 10.0.
+2023-01-04 14:11:16,672 - [INFO]: root - vm creation request for vm_id = 10 received at 10.0
+2023-01-04 14:11:16,672 - [INFO]: root - vm with vm_id = 10 created and allocated to host_id = 1 of datacenter_id = 0 at 10.0
+2023-01-04 14:11:16,672 - [INFO]: root - VM request with vm_id = 10 completed at 10.0.
+2023-01-04 14:11:16,672 - [INFO]: root - VM request with vm_id = 11 sent at 10.0.
+2023-01-04 14:11:16,672 - [INFO]: root - vm creation request for vm_id = 11 received at 10.0
+2023-01-04 14:11:16,672 - [INFO]: root - vm with vm_id = 11 created and allocated to host_id = 1 of datacenter_id = 0 at 10.0
+2023-01-04 14:11:16,673 - [INFO]: root - VM request with vm_id = 11 completed at 10.0.
+2023-01-04 14:11:16,673 - [INFO]: root - VM request with vm_id = 12 sent at 10.0.
+2023-01-04 14:11:16,673 - [INFO]: root - vm creation request for vm_id = 12 received at 10.0
+2023-01-04 14:11:16,673 - [INFO]: root - vm with vm_id = 12 created and allocated to host_id = 1 of datacenter_id = 0 at 10.0
+2023-01-04 14:11:16,673 - [INFO]: root - VM request with vm_id = 12 completed at 10.0.
+2023-01-04 14:11:16,673 - [INFO]: root - VM request with vm_id = 13 sent at 10.0.
+2023-01-04 14:11:16,673 - [INFO]: root - vm creation request for vm_id = 13 received at 10.0
+2023-01-04 14:11:16,673 - [INFO]: root - vm with vm_id = 13 created and allocated to host_id = 1 of datacenter_id = 0 at 10.0
+2023-01-04 14:11:16,673 - [INFO]: root - VM request with vm_id = 13 completed at 10.0.
+2023-01-04 14:11:16,674 - [INFO]: root - VM request with vm_id = 14 sent at 10.0.
+2023-01-04 14:11:16,674 - [INFO]: root - vm creation request for vm_id = 14 received at 10.0
+2023-01-04 14:11:16,674 - [INFO]: root - vm with vm_id = 14 created and allocated to host_id = 1 of datacenter_id = 0 at 10.0
+2023-01-04 14:11:16,674 - [INFO]: root - VM request with vm_id = 14 completed at 10.0.
+2023-01-04 14:11:16,674 - [INFO]: root - VM request with vm_id = 15 sent at 10.0.
+2023-01-04 14:11:16,674 - [INFO]: root - vm creation request for vm_id = 15 received at 10.0
+2023-01-04 14:11:16,674 - [INFO]: root - vm with vm_id = 15 created and allocated to host_id = 1 of datacenter_id = 0 at 10.0
+2023-01-04 14:11:16,674 - [INFO]: root - VM request with vm_id = 15 completed at 10.0.
+2023-01-04 14:11:16,674 - [INFO]: root - VM request with vm_id = 16 sent at 10.0.
+2023-01-04 14:11:16,674 - [INFO]: root - vm creation request for vm_id = 16 received at 10.0
+2023-01-04 14:11:16,675 - [INFO]: root - vm with vm_id = 16 created and allocated to host_id = 1 of datacenter_id = 0 at 10.0
+2023-01-04 14:11:16,675 - [INFO]: root - VM request with vm_id = 16 completed at 10.0.
+2023-01-04 14:11:16,675 - [INFO]: root - VM request with vm_id = 17 sent at 10.0.
+2023-01-04 14:11:16,675 - [INFO]: root - vm creation request for vm_id = 17 received at 10.0
+2023-01-04 14:11:16,675 - [INFO]: root - vm with vm_id = 17 created and allocated to host_id = 2 of datacenter_id = 0 at 10.0
+2023-01-04 14:11:16,675 - [INFO]: root - VM request with vm_id = 17 completed at 10.0.
+2023-01-04 14:11:16,675 - [INFO]: root - VM request with vm_id = 18 sent at 10.0.
+2023-01-04 14:11:16,675 - [INFO]: root - vm creation request for vm_id = 18 received at 10.0
+2023-01-04 14:11:16,675 - [INFO]: root - vm with vm_id = 18 created and allocated to host_id = 2 of datacenter_id = 0 at 10.0
+2023-01-04 14:11:16,676 - [INFO]: root - VM request with vm_id = 18 completed at 10.0.
+2023-01-04 14:11:16,676 - [INFO]: root - VM request with vm_id = 19 sent at 10.0.
+2023-01-04 14:11:16,676 - [INFO]: root - vm creation request for vm_id = 19 received at 10.0
+2023-01-04 14:11:16,676 - [INFO]: root - vm with vm_id = 19 created and allocated to host_id = 2 of datacenter_id = 0 at 10.0
+2023-01-04 14:11:16,676 - [INFO]: root - VM request with vm_id = 19 completed at 10.0.
+2023-01-04 14:11:16,676 - [INFO]: root - VM request with vm_id = 20 sent at 10.0.
+2023-01-04 14:11:16,676 - [INFO]: root - vm creation request for vm_id = 20 received at 10.0
+2023-01-04 14:11:16,676 - [INFO]: root - vm with vm_id = 20 created and allocated to host_id = 2 of datacenter_id = 0 at 10.0
+2023-01-04 14:11:16,676 - [INFO]: root - VM request with vm_id = 20 completed at 10.0.
+2023-01-04 14:11:16,676 - [INFO]: root - Broker stopped at 10.0.
+2023-01-04 14:11:16,677 - [INFO]: root - vm destroy request for vm_id = 1 received at 100.0
+2023-01-04 14:11:16,677 - [INFO]: root - vm with vm_id = 1 destroyed at 100.0
+2023-01-04 14:11:16,677 - [INFO]: root - vm destroy request for vm_id = 2 received at 110.0
+2023-01-04 14:11:16,677 - [INFO]: root - vm with vm_id = 2 destroyed at 110.0
+2023-01-04 14:11:16,677 - [INFO]: root - vm destroy request for vm_id = 3 received at 110.0
+2023-01-04 14:11:16,677 - [INFO]: root - vm with vm_id = 3 destroyed at 110.0
+2023-01-04 14:11:16,677 - [INFO]: root - vm destroy request for vm_id = 4 received at 110.0
+2023-01-04 14:11:16,677 - [INFO]: root - vm with vm_id = 4 destroyed at 110.0
+2023-01-04 14:11:16,678 - [INFO]: root - vm destroy request for vm_id = 5 received at 110.0
+2023-01-04 14:11:16,678 - [INFO]: root - vm with vm_id = 5 destroyed at 110.0
+2023-01-04 14:11:16,678 - [INFO]: root - vm destroy request for vm_id = 6 received at 110.0
+2023-01-04 14:11:16,678 - [INFO]: root - vm with vm_id = 6 destroyed at 110.0
+2023-01-04 14:11:16,678 - [INFO]: root - vm destroy request for vm_id = 7 received at 110.0
+2023-01-04 14:11:16,678 - [INFO]: root - vm with vm_id = 7 destroyed at 110.0
+2023-01-04 14:11:16,678 - [INFO]: root - vm destroy request for vm_id = 8 received at 110.0
+2023-01-04 14:11:16,678 - [INFO]: root - vm with vm_id = 8 destroyed at 110.0
+2023-01-04 14:11:16,678 - [INFO]: root - vm destroy request for vm_id = 9 received at 110.0
+2023-01-04 14:11:16,678 - [INFO]: root - vm with vm_id = 9 destroyed at 110.0
+2023-01-04 14:11:16,678 - [INFO]: root - vm destroy request for vm_id = 10 received at 110.0
+2023-01-04 14:11:16,679 - [INFO]: root - vm with vm_id = 10 destroyed at 110.0
+2023-01-04 14:11:16,679 - [INFO]: root - vm destroy request for vm_id = 11 received at 110.0
+2023-01-04 14:11:16,679 - [INFO]: root - vm with vm_id = 11 destroyed at 110.0
+2023-01-04 14:11:16,679 - [INFO]: root - vm destroy request for vm_id = 12 received at 110.0
+2023-01-04 14:11:16,679 - [INFO]: root - vm with vm_id = 12 destroyed at 110.0
+2023-01-04 14:11:16,679 - [INFO]: root - vm destroy request for vm_id = 13 received at 110.0
+2023-01-04 14:11:16,679 - [INFO]: root - vm with vm_id = 13 destroyed at 110.0
+2023-01-04 14:11:16,679 - [INFO]: root - vm destroy request for vm_id = 14 received at 110.0
+2023-01-04 14:11:16,679 - [INFO]: root - vm with vm_id = 14 destroyed at 110.0
+2023-01-04 14:11:16,679 - [INFO]: root - vm destroy request for vm_id = 15 received at 110.0
+2023-01-04 14:11:16,679 - [INFO]: root - vm with vm_id = 15 destroyed at 110.0
+2023-01-04 14:11:16,679 - [INFO]: root - vm destroy request for vm_id = 16 received at 110.0
+2023-01-04 14:11:16,679 - [INFO]: root - vm with vm_id = 16 destroyed at 110.0
+2023-01-04 14:11:16,680 - [INFO]: root - vm destroy request for vm_id = 17 received at 110.0
+2023-01-04 14:11:16,680 - [INFO]: root - vm with vm_id = 17 destroyed at 110.0
+2023-01-04 14:11:16,680 - [INFO]: root - vm destroy request for vm_id = 18 received at 110.0
+2023-01-04 14:11:16,680 - [INFO]: root - vm with vm_id = 18 destroyed at 110.0
+2023-01-04 14:11:16,680 - [INFO]: root - vm destroy request for vm_id = 19 received at 110.0
+2023-01-04 14:11:16,680 - [INFO]: root - vm with vm_id = 19 destroyed at 110.0
+2023-01-04 14:11:16,680 - [INFO]: root - vm destroy request for vm_id = 20 received at 110.0
+2023-01-04 14:11:16,680 - [INFO]: root - vm with vm_id = 20 destroyed at 110.0
+2023-01-04 14:12:17,930 - [INFO]: Initializing PyCloudSim...
+2023-01-04 14:12:17,930 - [INFO]: Creating 1 datacenters, each with 4 hosts.
+2023-01-04 14:12:17,930 - [INFO]: Creating the cloud.
+2023-01-04 14:12:17,930 - [INFO]: Importing VMs from file.
+2023-01-04 14:12:17,931 - [INFO]: Creating the broker.
+2023-01-04 14:12:17,931 - [INFO]: Creating PyCloudSim environment.
+2023-01-04 14:12:17,931 - [INFO]: Starting simulation.
+2023-01-04 14:12:17,931 - [INFO]: Broker started at 0.
+2023-01-04 14:12:17,931 - [INFO]: VM request with vm_id = 1 sent at 0.
+2023-01-04 14:12:17,931 - [INFO]: VM creation request for vm_id = 1 received at 0.
+2023-01-04 14:12:17,932 - [INFO]: VM with vm_id = 1 created and allocated to host_id = 0 of datacenter_id = 0 at 0.
+2023-01-04 14:12:17,932 - [INFO]: VM request with vm_id = 1 completed at 0.
+2023-01-04 14:12:17,932 - [INFO]: VM request with vm_id = 2 sent at 10.0.
+2023-01-04 14:12:17,932 - [INFO]: VM creation request for vm_id = 2 received at 10.0.
+2023-01-04 14:12:17,933 - [INFO]: VM with vm_id = 2 created and allocated to host_id = 0 of datacenter_id = 0 at 10.0.
+2023-01-04 14:12:17,933 - [INFO]: VM request with vm_id = 3 sent at 10.0.
+2023-01-04 14:12:17,933 - [INFO]: VM creation request for vm_id = 3 received at 10.0.
+2023-01-04 14:12:17,933 - [INFO]: VM with vm_id = 3 created and allocated to host_id = 0 of datacenter_id = 0 at 10.0.
+2023-01-04 14:12:17,933 - [INFO]: VM request with vm_id = 2 completed at 10.0.
+2023-01-04 14:12:17,933 - [INFO]: VM request with vm_id = 3 completed at 10.0.
+2023-01-04 14:12:17,933 - [INFO]: VM request with vm_id = 4 sent at 10.0.
+2023-01-04 14:12:17,934 - [INFO]: VM creation request for vm_id = 4 received at 10.0.
+2023-01-04 14:12:17,934 - [INFO]: VM with vm_id = 4 created and allocated to host_id = 0 of datacenter_id = 0 at 10.0.
+2023-01-04 14:12:17,934 - [INFO]: VM request with vm_id = 4 completed at 10.0.
+2023-01-04 14:12:17,934 - [INFO]: VM request with vm_id = 5 sent at 10.0.
+2023-01-04 14:12:17,935 - [INFO]: VM creation request for vm_id = 5 received at 10.0.
+2023-01-04 14:12:17,935 - [INFO]: VM with vm_id = 5 created and allocated to host_id = 0 of datacenter_id = 0 at 10.0.
+2023-01-04 14:12:17,935 - [INFO]: VM request with vm_id = 5 completed at 10.0.
+2023-01-04 14:12:17,936 - [INFO]: VM request with vm_id = 6 sent at 10.0.
+2023-01-04 14:12:17,936 - [INFO]: VM creation request for vm_id = 6 received at 10.0.
+2023-01-04 14:12:17,936 - [INFO]: VM with vm_id = 6 created and allocated to host_id = 0 of datacenter_id = 0 at 10.0.
+2023-01-04 14:12:17,936 - [INFO]: VM request with vm_id = 6 completed at 10.0.
+2023-01-04 14:12:17,937 - [INFO]: VM request with vm_id = 7 sent at 10.0.
+2023-01-04 14:12:17,937 - [INFO]: VM creation request for vm_id = 7 received at 10.0.
+2023-01-04 14:12:17,937 - [INFO]: VM with vm_id = 7 created and allocated to host_id = 0 of datacenter_id = 0 at 10.0.
+2023-01-04 14:12:17,937 - [INFO]: VM request with vm_id = 7 completed at 10.0.
+2023-01-04 14:12:17,937 - [INFO]: VM request with vm_id = 8 sent at 10.0.
+2023-01-04 14:12:17,938 - [INFO]: VM creation request for vm_id = 8 received at 10.0.
+2023-01-04 14:12:17,938 - [INFO]: VM with vm_id = 8 created and allocated to host_id = 0 of datacenter_id = 0 at 10.0.
+2023-01-04 14:12:17,938 - [INFO]: VM request with vm_id = 8 completed at 10.0.
+2023-01-04 14:12:17,938 - [INFO]: VM request with vm_id = 9 sent at 10.0.
+2023-01-04 14:12:17,938 - [INFO]: VM creation request for vm_id = 9 received at 10.0.
+2023-01-04 14:12:17,938 - [INFO]: VM with vm_id = 9 created and allocated to host_id = 1 of datacenter_id = 0 at 10.0.
+2023-01-04 14:12:17,938 - [INFO]: VM request with vm_id = 9 completed at 10.0.
+2023-01-04 14:12:17,938 - [INFO]: VM request with vm_id = 10 sent at 10.0.
+2023-01-04 14:12:17,939 - [INFO]: VM creation request for vm_id = 10 received at 10.0.
+2023-01-04 14:12:17,939 - [INFO]: VM with vm_id = 10 created and allocated to host_id = 1 of datacenter_id = 0 at 10.0.
+2023-01-04 14:12:17,939 - [INFO]: VM request with vm_id = 10 completed at 10.0.
+2023-01-04 14:12:17,939 - [INFO]: VM request with vm_id = 11 sent at 10.0.
+2023-01-04 14:12:17,939 - [INFO]: VM creation request for vm_id = 11 received at 10.0.
+2023-01-04 14:12:17,939 - [INFO]: VM with vm_id = 11 created and allocated to host_id = 1 of datacenter_id = 0 at 10.0.
+2023-01-04 14:12:17,939 - [INFO]: VM request with vm_id = 11 completed at 10.0.
+2023-01-04 14:12:17,940 - [INFO]: VM request with vm_id = 12 sent at 10.0.
+2023-01-04 14:12:17,940 - [INFO]: VM creation request for vm_id = 12 received at 10.0.
+2023-01-04 14:12:17,940 - [INFO]: VM with vm_id = 12 created and allocated to host_id = 1 of datacenter_id = 0 at 10.0.
+2023-01-04 14:12:17,940 - [INFO]: VM request with vm_id = 12 completed at 10.0.
+2023-01-04 14:12:17,940 - [INFO]: VM request with vm_id = 13 sent at 10.0.
+2023-01-04 14:12:17,940 - [INFO]: VM creation request for vm_id = 13 received at 10.0.
+2023-01-04 14:12:17,940 - [INFO]: VM with vm_id = 13 created and allocated to host_id = 1 of datacenter_id = 0 at 10.0.
+2023-01-04 14:12:17,941 - [INFO]: VM request with vm_id = 13 completed at 10.0.
+2023-01-04 14:12:17,941 - [INFO]: VM request with vm_id = 14 sent at 10.0.
+2023-01-04 14:12:17,941 - [INFO]: VM creation request for vm_id = 14 received at 10.0.
+2023-01-04 14:12:17,941 - [INFO]: VM with vm_id = 14 created and allocated to host_id = 1 of datacenter_id = 0 at 10.0.
+2023-01-04 14:12:17,941 - [INFO]: VM request with vm_id = 14 completed at 10.0.
+2023-01-04 14:12:17,941 - [INFO]: VM request with vm_id = 15 sent at 10.0.
+2023-01-04 14:12:17,941 - [INFO]: VM creation request for vm_id = 15 received at 10.0.
+2023-01-04 14:12:17,941 - [INFO]: VM with vm_id = 15 created and allocated to host_id = 1 of datacenter_id = 0 at 10.0.
+2023-01-04 14:12:17,942 - [INFO]: VM request with vm_id = 15 completed at 10.0.
+2023-01-04 14:12:17,942 - [INFO]: VM request with vm_id = 16 sent at 10.0.
+2023-01-04 14:12:17,942 - [INFO]: VM creation request for vm_id = 16 received at 10.0.
+2023-01-04 14:12:17,942 - [INFO]: VM with vm_id = 16 created and allocated to host_id = 1 of datacenter_id = 0 at 10.0.
+2023-01-04 14:12:17,942 - [INFO]: VM request with vm_id = 16 completed at 10.0.
+2023-01-04 14:12:17,942 - [INFO]: VM request with vm_id = 17 sent at 10.0.
+2023-01-04 14:12:17,942 - [INFO]: VM creation request for vm_id = 17 received at 10.0.
+2023-01-04 14:12:17,942 - [INFO]: VM with vm_id = 17 created and allocated to host_id = 2 of datacenter_id = 0 at 10.0.
+2023-01-04 14:12:17,943 - [INFO]: VM request with vm_id = 17 completed at 10.0.
+2023-01-04 14:12:17,943 - [INFO]: VM request with vm_id = 18 sent at 10.0.
+2023-01-04 14:12:17,943 - [INFO]: VM creation request for vm_id = 18 received at 10.0.
+2023-01-04 14:12:17,944 - [INFO]: VM with vm_id = 18 created and allocated to host_id = 2 of datacenter_id = 0 at 10.0.
+2023-01-04 14:12:17,944 - [INFO]: VM request with vm_id = 18 completed at 10.0.
+2023-01-04 14:12:17,944 - [INFO]: VM request with vm_id = 19 sent at 10.0.
+2023-01-04 14:12:17,944 - [INFO]: VM creation request for vm_id = 19 received at 10.0.
+2023-01-04 14:12:17,944 - [INFO]: VM with vm_id = 19 created and allocated to host_id = 2 of datacenter_id = 0 at 10.0.
+2023-01-04 14:12:17,944 - [INFO]: VM request with vm_id = 19 completed at 10.0.
+2023-01-04 14:12:17,945 - [INFO]: VM request with vm_id = 20 sent at 10.0.
+2023-01-04 14:12:17,945 - [INFO]: VM creation request for vm_id = 20 received at 10.0.
+2023-01-04 14:12:17,945 - [INFO]: VM with vm_id = 20 created and allocated to host_id = 2 of datacenter_id = 0 at 10.0.
+2023-01-04 14:12:17,945 - [INFO]: VM request with vm_id = 20 completed at 10.0.
+2023-01-04 14:12:17,945 - [INFO]: Broker stopped at 10.0.
+2023-01-04 14:12:17,945 - [INFO]: VM destroy request for vm_id = 1 received at 100.0
+2023-01-04 14:12:17,945 - [INFO]: VM with vm_id = 1 destroyed at 100.0.
+2023-01-04 14:12:17,945 - [INFO]: VM destroy request for vm_id = 2 received at 110.0
+2023-01-04 14:12:17,946 - [INFO]: VM with vm_id = 2 destroyed at 110.0.
+2023-01-04 14:12:17,946 - [INFO]: VM destroy request for vm_id = 3 received at 110.0
+2023-01-04 14:12:17,946 - [INFO]: VM with vm_id = 3 destroyed at 110.0.
+2023-01-04 14:12:17,946 - [INFO]: VM destroy request for vm_id = 4 received at 110.0
+2023-01-04 14:12:17,946 - [INFO]: VM with vm_id = 4 destroyed at 110.0.
+2023-01-04 14:12:17,946 - [INFO]: VM destroy request for vm_id = 5 received at 110.0
+2023-01-04 14:12:17,946 - [INFO]: VM with vm_id = 5 destroyed at 110.0.
+2023-01-04 14:12:17,946 - [INFO]: VM destroy request for vm_id = 6 received at 110.0
+2023-01-04 14:12:17,946 - [INFO]: VM with vm_id = 6 destroyed at 110.0.
+2023-01-04 14:12:17,946 - [INFO]: VM destroy request for vm_id = 7 received at 110.0
+2023-01-04 14:12:17,947 - [INFO]: VM with vm_id = 7 destroyed at 110.0.
+2023-01-04 14:12:17,947 - [INFO]: VM destroy request for vm_id = 8 received at 110.0
+2023-01-04 14:12:17,947 - [INFO]: VM with vm_id = 8 destroyed at 110.0.
+2023-01-04 14:12:17,947 - [INFO]: VM destroy request for vm_id = 9 received at 110.0
+2023-01-04 14:12:17,947 - [INFO]: VM with vm_id = 9 destroyed at 110.0.
+2023-01-04 14:12:17,947 - [INFO]: VM destroy request for vm_id = 10 received at 110.0
+2023-01-04 14:12:17,947 - [INFO]: VM with vm_id = 10 destroyed at 110.0.
+2023-01-04 14:12:17,947 - [INFO]: VM destroy request for vm_id = 11 received at 110.0
+2023-01-04 14:12:17,947 - [INFO]: VM with vm_id = 11 destroyed at 110.0.
+2023-01-04 14:12:17,947 - [INFO]: VM destroy request for vm_id = 12 received at 110.0
+2023-01-04 14:12:17,948 - [INFO]: VM with vm_id = 12 destroyed at 110.0.
+2023-01-04 14:12:17,948 - [INFO]: VM destroy request for vm_id = 13 received at 110.0
+2023-01-04 14:12:17,948 - [INFO]: VM with vm_id = 13 destroyed at 110.0.
+2023-01-04 14:12:17,948 - [INFO]: VM destroy request for vm_id = 14 received at 110.0
+2023-01-04 14:12:17,948 - [INFO]: VM with vm_id = 14 destroyed at 110.0.
+2023-01-04 14:12:17,948 - [INFO]: VM destroy request for vm_id = 15 received at 110.0
+2023-01-04 14:12:17,948 - [INFO]: VM with vm_id = 15 destroyed at 110.0.
+2023-01-04 14:12:17,948 - [INFO]: VM destroy request for vm_id = 16 received at 110.0
+2023-01-04 14:12:17,948 - [INFO]: VM with vm_id = 16 destroyed at 110.0.
+2023-01-04 14:12:17,948 - [INFO]: VM destroy request for vm_id = 17 received at 110.0
+2023-01-04 14:12:17,948 - [INFO]: VM with vm_id = 17 destroyed at 110.0.
+2023-01-04 14:12:17,949 - [INFO]: VM destroy request for vm_id = 18 received at 110.0
+2023-01-04 14:12:17,949 - [INFO]: VM with vm_id = 18 destroyed at 110.0.
+2023-01-04 14:12:17,949 - [INFO]: VM destroy request for vm_id = 19 received at 110.0
+2023-01-04 14:12:17,949 - [INFO]: VM with vm_id = 19 destroyed at 110.0.
+2023-01-04 14:12:17,949 - [INFO]: VM destroy request for vm_id = 20 received at 110.0
+2023-01-04 14:12:17,949 - [INFO]: VM with vm_id = 20 destroyed at 110.0.
+2023-01-04 16:41:39,918 - [INFO]: Initializing PyCloudSim...
+2023-01-04 16:41:39,919 - [INFO]: Creating 1 datacenters, each with 4 hosts.
+2023-01-04 16:41:39,919 - [INFO]: Creating the cloud.
+2023-01-04 16:41:39,919 - [INFO]: Importing VMs from file.
+2023-01-04 16:41:39,920 - [INFO]: Creating the broker.
+2023-01-04 16:41:39,920 - [INFO]: Creating PyCloudSim environment.
+2023-01-04 16:41:39,921 - [INFO]: Starting simulation.
+2023-01-04 16:41:39,921 - [INFO]: Broker started at 0.
+2023-01-04 16:41:39,921 - [INFO]: VM request with vm_id = 1 sent at 0.
+2023-01-04 16:41:39,921 - [INFO]: VM creation request for vm_id = 1 received at 0.
+2023-01-04 16:41:39,921 - [INFO]: VM with vm_id = 1 created and allocated to host_id = 0 of datacenter_id = 0 at 0.
+2023-01-04 16:41:39,921 - [INFO]: VM request with vm_id = 1 completed at 0.
+2023-01-04 16:41:39,921 - [INFO]: VM request with vm_id = 2 sent at 10.0.
+2023-01-04 16:41:39,921 - [INFO]: VM creation request for vm_id = 2 received at 10.0.
+2023-01-04 16:41:39,922 - [INFO]: VM with vm_id = 2 created and allocated to host_id = 0 of datacenter_id = 0 at 10.0.
+2023-01-04 16:41:39,922 - [INFO]: VM request with vm_id = 3 sent at 10.0.
+2023-01-04 16:41:39,922 - [INFO]: VM creation request for vm_id = 3 received at 10.0.
+2023-01-04 16:41:39,922 - [INFO]: VM with vm_id = 3 created and allocated to host_id = 0 of datacenter_id = 0 at 10.0.
+2023-01-04 16:41:39,922 - [INFO]: VM request with vm_id = 2 completed at 10.0.
+2023-01-04 16:41:39,922 - [INFO]: VM request with vm_id = 3 completed at 10.0.
+2023-01-04 16:41:39,922 - [INFO]: VM request with vm_id = 4 sent at 10.0.
+2023-01-04 16:41:39,923 - [INFO]: VM creation request for vm_id = 4 received at 10.0.
+2023-01-04 16:41:39,923 - [INFO]: VM with vm_id = 4 created and allocated to host_id = 0 of datacenter_id = 0 at 10.0.
+2023-01-04 16:41:39,923 - [INFO]: VM request with vm_id = 4 completed at 10.0.
+2023-01-04 16:41:39,923 - [INFO]: VM request with vm_id = 5 sent at 10.0.
+2023-01-04 16:41:39,924 - [INFO]: VM creation request for vm_id = 5 received at 10.0.
+2023-01-04 16:41:39,924 - [INFO]: VM with vm_id = 5 created and allocated to host_id = 0 of datacenter_id = 0 at 10.0.
+2023-01-04 16:41:39,924 - [INFO]: VM request with vm_id = 5 completed at 10.0.
+2023-01-04 16:41:39,924 - [INFO]: VM request with vm_id = 6 sent at 10.0.
+2023-01-04 16:41:39,924 - [INFO]: VM creation request for vm_id = 6 received at 10.0.
+2023-01-04 16:41:39,924 - [INFO]: VM with vm_id = 6 created and allocated to host_id = 0 of datacenter_id = 0 at 10.0.
+2023-01-04 16:41:39,924 - [INFO]: VM request with vm_id = 6 completed at 10.0.
+2023-01-04 16:41:39,924 - [INFO]: VM request with vm_id = 7 sent at 10.0.
+2023-01-04 16:41:39,925 - [INFO]: VM creation request for vm_id = 7 received at 10.0.
+2023-01-04 16:41:39,925 - [INFO]: VM with vm_id = 7 created and allocated to host_id = 0 of datacenter_id = 0 at 10.0.
+2023-01-04 16:41:39,925 - [INFO]: VM request with vm_id = 7 completed at 10.0.
+2023-01-04 16:41:39,925 - [INFO]: VM request with vm_id = 8 sent at 10.0.
+2023-01-04 16:41:39,925 - [INFO]: VM creation request for vm_id = 8 received at 10.0.
+2023-01-04 16:41:39,925 - [INFO]: VM with vm_id = 8 created and allocated to host_id = 0 of datacenter_id = 0 at 10.0.
+2023-01-04 16:41:39,925 - [INFO]: VM request with vm_id = 8 completed at 10.0.
+2023-01-04 16:41:39,925 - [INFO]: VM request with vm_id = 9 sent at 10.0.
+2023-01-04 16:41:39,926 - [INFO]: VM creation request for vm_id = 9 received at 10.0.
+2023-01-04 16:41:39,926 - [INFO]: VM with vm_id = 9 created and allocated to host_id = 1 of datacenter_id = 0 at 10.0.
+2023-01-04 16:41:39,926 - [INFO]: VM request with vm_id = 9 completed at 10.0.
+2023-01-04 16:41:39,926 - [INFO]: VM request with vm_id = 10 sent at 10.0.
+2023-01-04 16:41:39,926 - [INFO]: VM creation request for vm_id = 10 received at 10.0.
+2023-01-04 16:41:39,926 - [INFO]: VM with vm_id = 10 created and allocated to host_id = 1 of datacenter_id = 0 at 10.0.
+2023-01-04 16:41:39,926 - [INFO]: VM request with vm_id = 10 completed at 10.0.
+2023-01-04 16:41:39,926 - [INFO]: VM request with vm_id = 11 sent at 10.0.
+2023-01-04 16:41:39,926 - [INFO]: VM creation request for vm_id = 11 received at 10.0.
+2023-01-04 16:41:39,927 - [INFO]: VM with vm_id = 11 created and allocated to host_id = 1 of datacenter_id = 0 at 10.0.
+2023-01-04 16:41:39,927 - [INFO]: VM request with vm_id = 11 completed at 10.0.
+2023-01-04 16:41:39,927 - [INFO]: VM request with vm_id = 12 sent at 10.0.
+2023-01-04 16:41:39,927 - [INFO]: VM creation request for vm_id = 12 received at 10.0.
+2023-01-04 16:41:39,927 - [INFO]: VM with vm_id = 12 created and allocated to host_id = 1 of datacenter_id = 0 at 10.0.
+2023-01-04 16:41:39,927 - [INFO]: VM request with vm_id = 12 completed at 10.0.
+2023-01-04 16:41:39,927 - [INFO]: VM request with vm_id = 13 sent at 10.0.
+2023-01-04 16:41:39,927 - [INFO]: VM creation request for vm_id = 13 received at 10.0.
+2023-01-04 16:41:39,927 - [INFO]: VM with vm_id = 13 created and allocated to host_id = 1 of datacenter_id = 0 at 10.0.
+2023-01-04 16:41:39,928 - [INFO]: VM request with vm_id = 13 completed at 10.0.
+2023-01-04 16:41:39,928 - [INFO]: VM request with vm_id = 14 sent at 10.0.
+2023-01-04 16:41:39,928 - [INFO]: VM creation request for vm_id = 14 received at 10.0.
+2023-01-04 16:41:39,928 - [INFO]: VM with vm_id = 14 created and allocated to host_id = 1 of datacenter_id = 0 at 10.0.
+2023-01-04 16:41:39,928 - [INFO]: VM request with vm_id = 14 completed at 10.0.
+2023-01-04 16:41:39,928 - [INFO]: VM request with vm_id = 15 sent at 10.0.
+2023-01-04 16:41:39,928 - [INFO]: VM creation request for vm_id = 15 received at 10.0.
+2023-01-04 16:41:39,928 - [INFO]: VM with vm_id = 15 created and allocated to host_id = 1 of datacenter_id = 0 at 10.0.
+2023-01-04 16:41:39,929 - [INFO]: VM request with vm_id = 15 completed at 10.0.
+2023-01-04 16:41:39,929 - [INFO]: VM request with vm_id = 16 sent at 10.0.
+2023-01-04 16:41:39,929 - [INFO]: VM creation request for vm_id = 16 received at 10.0.
+2023-01-04 16:41:39,929 - [INFO]: VM with vm_id = 16 created and allocated to host_id = 1 of datacenter_id = 0 at 10.0.
+2023-01-04 16:41:39,929 - [INFO]: VM request with vm_id = 16 completed at 10.0.
+2023-01-04 16:41:39,929 - [INFO]: VM request with vm_id = 17 sent at 10.0.
+2023-01-04 16:41:39,929 - [INFO]: VM creation request for vm_id = 17 received at 10.0.
+2023-01-04 16:41:39,929 - [INFO]: VM with vm_id = 17 created and allocated to host_id = 2 of datacenter_id = 0 at 10.0.
+2023-01-04 16:41:39,929 - [INFO]: VM request with vm_id = 17 completed at 10.0.
+2023-01-04 16:41:39,930 - [INFO]: VM request with vm_id = 18 sent at 10.0.
+2023-01-04 16:41:39,930 - [INFO]: VM creation request for vm_id = 18 received at 10.0.
+2023-01-04 16:41:39,930 - [INFO]: VM with vm_id = 18 created and allocated to host_id = 2 of datacenter_id = 0 at 10.0.
+2023-01-04 16:41:39,930 - [INFO]: VM request with vm_id = 18 completed at 10.0.
+2023-01-04 16:41:39,930 - [INFO]: VM request with vm_id = 19 sent at 10.0.
+2023-01-04 16:41:39,930 - [INFO]: VM creation request for vm_id = 19 received at 10.0.
+2023-01-04 16:41:39,930 - [INFO]: VM with vm_id = 19 created and allocated to host_id = 2 of datacenter_id = 0 at 10.0.
+2023-01-04 16:41:39,930 - [INFO]: VM request with vm_id = 19 completed at 10.0.
+2023-01-04 16:41:39,931 - [INFO]: VM request with vm_id = 20 sent at 10.0.
+2023-01-04 16:41:39,931 - [INFO]: VM creation request for vm_id = 20 received at 10.0.
+2023-01-04 16:41:39,931 - [INFO]: VM with vm_id = 20 created and allocated to host_id = 2 of datacenter_id = 0 at 10.0.
+2023-01-04 16:41:39,931 - [INFO]: VM request with vm_id = 20 completed at 10.0.
+2023-01-04 16:41:39,931 - [INFO]: Broker stopped at 10.0.
+2023-01-04 16:41:39,931 - [INFO]: VM destroy request for vm_id = 1 received at 100.0.
+2023-01-04 16:41:39,931 - [INFO]: VM with vm_id = 1 destroyed at 100.0.
+2023-01-04 16:41:39,931 - [INFO]: VM destroy request for vm_id = 2 received at 110.0.
+2023-01-04 16:41:39,931 - [INFO]: VM with vm_id = 2 destroyed at 110.0.
+2023-01-04 16:41:39,932 - [INFO]: VM destroy request for vm_id = 3 received at 110.0.
+2023-01-04 16:41:39,932 - [INFO]: VM with vm_id = 3 destroyed at 110.0.
+2023-01-04 16:41:39,932 - [INFO]: VM destroy request for vm_id = 4 received at 110.0.
+2023-01-04 16:41:39,932 - [INFO]: VM with vm_id = 4 destroyed at 110.0.
+2023-01-04 16:41:39,932 - [INFO]: VM destroy request for vm_id = 5 received at 110.0.
+2023-01-04 16:41:39,932 - [INFO]: VM with vm_id = 5 destroyed at 110.0.
+2023-01-04 16:41:39,932 - [INFO]: VM destroy request for vm_id = 6 received at 110.0.
+2023-01-04 16:41:39,932 - [INFO]: VM with vm_id = 6 destroyed at 110.0.
+2023-01-04 16:41:39,932 - [INFO]: VM destroy request for vm_id = 7 received at 110.0.
+2023-01-04 16:41:39,932 - [INFO]: VM with vm_id = 7 destroyed at 110.0.
+2023-01-04 16:41:39,932 - [INFO]: VM destroy request for vm_id = 8 received at 110.0.
+2023-01-04 16:41:39,933 - [INFO]: VM with vm_id = 8 destroyed at 110.0.
+2023-01-04 16:41:39,933 - [INFO]: VM destroy request for vm_id = 9 received at 110.0.
+2023-01-04 16:41:39,933 - [INFO]: VM with vm_id = 9 destroyed at 110.0.
+2023-01-04 16:41:39,933 - [INFO]: VM destroy request for vm_id = 10 received at 110.0.
+2023-01-04 16:41:39,933 - [INFO]: VM with vm_id = 10 destroyed at 110.0.
+2023-01-04 16:41:39,933 - [INFO]: VM destroy request for vm_id = 11 received at 110.0.
+2023-01-04 16:41:39,933 - [INFO]: VM with vm_id = 11 destroyed at 110.0.
+2023-01-04 16:41:39,933 - [INFO]: VM destroy request for vm_id = 12 received at 110.0.
+2023-01-04 16:41:39,933 - [INFO]: VM with vm_id = 12 destroyed at 110.0.
+2023-01-04 16:41:39,934 - [INFO]: VM destroy request for vm_id = 13 received at 110.0.
+2023-01-04 16:41:39,934 - [INFO]: VM with vm_id = 13 destroyed at 110.0.
+2023-01-04 16:41:39,934 - [INFO]: VM destroy request for vm_id = 14 received at 110.0.
+2023-01-04 16:41:39,934 - [INFO]: VM with vm_id = 14 destroyed at 110.0.
+2023-01-04 16:41:39,934 - [INFO]: VM destroy request for vm_id = 15 received at 110.0.
+2023-01-04 16:41:39,934 - [INFO]: VM with vm_id = 15 destroyed at 110.0.
+2023-01-04 16:41:39,934 - [INFO]: VM destroy request for vm_id = 16 received at 110.0.
+2023-01-04 16:41:39,934 - [INFO]: VM with vm_id = 16 destroyed at 110.0.
+2023-01-04 16:41:39,935 - [INFO]: VM destroy request for vm_id = 17 received at 110.0.
+2023-01-04 16:41:39,935 - [INFO]: VM with vm_id = 17 destroyed at 110.0.
+2023-01-04 16:41:39,935 - [INFO]: VM destroy request for vm_id = 18 received at 110.0.
+2023-01-04 16:41:39,935 - [INFO]: VM with vm_id = 18 destroyed at 110.0.
+2023-01-04 16:41:39,935 - [INFO]: VM destroy request for vm_id = 19 received at 110.0.
+2023-01-04 16:41:39,935 - [INFO]: VM with vm_id = 19 destroyed at 110.0.
+2023-01-04 16:41:39,935 - [INFO]: VM destroy request for vm_id = 20 received at 110.0.
+2023-01-04 16:41:39,935 - [INFO]: VM with vm_id = 20 destroyed at 110.0.
+2023-01-04 16:51:34,933 - [INFO]: Initializing PyCloudSim...
+2023-01-04 16:51:34,934 - [INFO]: Creating 1 datacenters, each with 4 hosts.
+2023-01-04 16:51:34,934 - [INFO]: Creating the cloud.
+2023-01-04 16:51:34,934 - [INFO]: Importing VMs from file.
+2023-01-04 16:51:34,935 - [INFO]: Creating the broker.
+2023-01-04 16:51:34,935 - [INFO]: Creating PyCloudSim environment.
+2023-01-04 16:51:34,935 - [INFO]: Starting simulation.
+2023-01-04 16:51:34,935 - [INFO]: Broker started at 0.
+2023-01-04 16:51:34,935 - [INFO]: VM request with vm_id = 1 sent at 0.
+2023-01-04 16:51:34,935 - [INFO]: VM creation request for vm_id = 1 received at 0.
+2023-01-04 16:51:34,936 - [INFO]: VM with vm_id = 1 created and allocated to host_id = 0 of datacenter_id = 0 at 0.
+2023-01-04 16:51:34,936 - [INFO]: VM request with vm_id = 1 completed at 0.
+2023-01-04 16:51:34,936 - [INFO]: VM request with vm_id = 2 sent at 10.0.
+2023-01-04 16:51:34,936 - [INFO]: VM creation request for vm_id = 2 received at 10.0.
+2023-01-04 16:51:34,936 - [INFO]: VM with vm_id = 2 created and allocated to host_id = 0 of datacenter_id = 0 at 10.0.
+2023-01-04 16:51:34,936 - [INFO]: VM request with vm_id = 3 sent at 10.0.
+2023-01-04 16:51:34,936 - [INFO]: VM creation request for vm_id = 3 received at 10.0.
+2023-01-04 16:51:34,937 - [INFO]: VM with vm_id = 3 created and allocated to host_id = 0 of datacenter_id = 0 at 10.0.
+2023-01-04 16:51:34,937 - [INFO]: VM request with vm_id = 2 completed at 10.0.
+2023-01-04 16:51:34,937 - [INFO]: VM request with vm_id = 3 completed at 10.0.
+2023-01-04 16:51:34,937 - [INFO]: VM request with vm_id = 4 sent at 10.0.
+2023-01-04 16:51:34,937 - [INFO]: VM creation request for vm_id = 4 received at 10.0.
+2023-01-04 16:51:34,937 - [INFO]: VM with vm_id = 4 created and allocated to host_id = 0 of datacenter_id = 0 at 10.0.
+2023-01-04 16:51:34,937 - [INFO]: VM request with vm_id = 4 completed at 10.0.
+2023-01-04 16:51:34,937 - [INFO]: VM request with vm_id = 5 sent at 10.0.
+2023-01-04 16:51:34,938 - [INFO]: VM creation request for vm_id = 5 received at 10.0.
+2023-01-04 16:51:34,938 - [INFO]: VM with vm_id = 5 created and allocated to host_id = 0 of datacenter_id = 0 at 10.0.
+2023-01-04 16:51:34,938 - [INFO]: VM request with vm_id = 5 completed at 10.0.
+2023-01-04 16:51:34,938 - [INFO]: VM request with vm_id = 6 sent at 10.0.
+2023-01-04 16:51:34,938 - [INFO]: VM creation request for vm_id = 6 received at 10.0.
+2023-01-04 16:51:34,938 - [INFO]: VM with vm_id = 6 created and allocated to host_id = 0 of datacenter_id = 0 at 10.0.
+2023-01-04 16:51:34,938 - [INFO]: VM request with vm_id = 6 completed at 10.0.
+2023-01-04 16:51:34,938 - [INFO]: VM request with vm_id = 7 sent at 10.0.
+2023-01-04 16:51:34,938 - [INFO]: VM creation request for vm_id = 7 received at 10.0.
+2023-01-04 16:51:34,939 - [INFO]: VM with vm_id = 7 created and allocated to host_id = 0 of datacenter_id = 0 at 10.0.
+2023-01-04 16:51:34,939 - [INFO]: VM request with vm_id = 7 completed at 10.0.
+2023-01-04 16:51:34,939 - [INFO]: VM request with vm_id = 8 sent at 10.0.
+2023-01-04 16:51:34,939 - [INFO]: VM creation request for vm_id = 8 received at 10.0.
+2023-01-04 16:51:34,939 - [INFO]: VM with vm_id = 8 created and allocated to host_id = 0 of datacenter_id = 0 at 10.0.
+2023-01-04 16:51:34,939 - [INFO]: VM request with vm_id = 8 completed at 10.0.
+2023-01-04 16:51:34,939 - [INFO]: VM request with vm_id = 9 sent at 10.0.
+2023-01-04 16:51:34,939 - [INFO]: VM creation request for vm_id = 9 received at 10.0.
+2023-01-04 16:51:34,940 - [INFO]: VM with vm_id = 9 created and allocated to host_id = 1 of datacenter_id = 0 at 10.0.
+2023-01-04 16:51:34,940 - [INFO]: VM request with vm_id = 9 completed at 10.0.
+2023-01-04 16:51:34,940 - [INFO]: VM request with vm_id = 10 sent at 10.0.
+2023-01-04 16:51:34,940 - [INFO]: VM creation request for vm_id = 10 received at 10.0.
+2023-01-04 16:51:34,940 - [INFO]: VM with vm_id = 10 created and allocated to host_id = 1 of datacenter_id = 0 at 10.0.
+2023-01-04 16:51:34,940 - [INFO]: VM request with vm_id = 10 completed at 10.0.
+2023-01-04 16:51:34,940 - [INFO]: VM request with vm_id = 11 sent at 10.0.
+2023-01-04 16:51:34,940 - [INFO]: VM creation request for vm_id = 11 received at 10.0.
+2023-01-04 16:51:34,941 - [INFO]: VM with vm_id = 11 created and allocated to host_id = 1 of datacenter_id = 0 at 10.0.
+2023-01-04 16:51:34,941 - [INFO]: VM request with vm_id = 11 completed at 10.0.
+2023-01-04 16:51:34,941 - [INFO]: VM request with vm_id = 12 sent at 10.0.
+2023-01-04 16:51:34,941 - [INFO]: VM creation request for vm_id = 12 received at 10.0.
+2023-01-04 16:51:34,941 - [INFO]: VM with vm_id = 12 created and allocated to host_id = 1 of datacenter_id = 0 at 10.0.
+2023-01-04 16:51:34,941 - [INFO]: VM request with vm_id = 12 completed at 10.0.
+2023-01-04 16:51:34,941 - [INFO]: VM request with vm_id = 13 sent at 10.0.
+2023-01-04 16:51:34,941 - [INFO]: VM creation request for vm_id = 13 received at 10.0.
+2023-01-04 16:51:34,941 - [INFO]: VM with vm_id = 13 created and allocated to host_id = 1 of datacenter_id = 0 at 10.0.
+2023-01-04 16:51:34,942 - [INFO]: VM request with vm_id = 13 completed at 10.0.
+2023-01-04 16:51:34,942 - [INFO]: VM request with vm_id = 14 sent at 10.0.
+2023-01-04 16:51:34,942 - [INFO]: VM creation request for vm_id = 14 received at 10.0.
+2023-01-04 16:51:34,942 - [INFO]: VM with vm_id = 14 created and allocated to host_id = 1 of datacenter_id = 0 at 10.0.
+2023-01-04 16:51:34,942 - [INFO]: VM request with vm_id = 14 completed at 10.0.
+2023-01-04 16:51:34,942 - [INFO]: VM request with vm_id = 15 sent at 10.0.
+2023-01-04 16:51:34,942 - [INFO]: VM creation request for vm_id = 15 received at 10.0.
+2023-01-04 16:51:34,942 - [INFO]: VM with vm_id = 15 created and allocated to host_id = 1 of datacenter_id = 0 at 10.0.
+2023-01-04 16:51:34,942 - [INFO]: VM request with vm_id = 15 completed at 10.0.
+2023-01-04 16:51:34,943 - [INFO]: VM request with vm_id = 16 sent at 10.0.
+2023-01-04 16:51:34,943 - [INFO]: VM creation request for vm_id = 16 received at 10.0.
+2023-01-04 16:51:34,943 - [INFO]: VM with vm_id = 16 created and allocated to host_id = 1 of datacenter_id = 0 at 10.0.
+2023-01-04 16:51:34,943 - [INFO]: VM request with vm_id = 16 completed at 10.0.
+2023-01-04 16:51:34,943 - [INFO]: VM request with vm_id = 17 sent at 10.0.
+2023-01-04 16:51:34,943 - [INFO]: VM creation request for vm_id = 17 received at 10.0.
+2023-01-04 16:51:34,943 - [INFO]: VM with vm_id = 17 created and allocated to host_id = 2 of datacenter_id = 0 at 10.0.
+2023-01-04 16:51:34,943 - [INFO]: VM request with vm_id = 17 completed at 10.0.
+2023-01-04 16:51:34,943 - [INFO]: VM request with vm_id = 18 sent at 10.0.
+2023-01-04 16:51:34,944 - [INFO]: VM creation request for vm_id = 18 received at 10.0.
+2023-01-04 16:51:34,944 - [INFO]: VM with vm_id = 18 created and allocated to host_id = 2 of datacenter_id = 0 at 10.0.
+2023-01-04 16:51:34,944 - [INFO]: VM request with vm_id = 18 completed at 10.0.
+2023-01-04 16:51:34,944 - [INFO]: VM request with vm_id = 19 sent at 10.0.
+2023-01-04 16:51:34,944 - [INFO]: VM creation request for vm_id = 19 received at 10.0.
+2023-01-04 16:51:34,944 - [INFO]: VM with vm_id = 19 created and allocated to host_id = 2 of datacenter_id = 0 at 10.0.
+2023-01-04 16:51:34,944 - [INFO]: VM request with vm_id = 19 completed at 10.0.
+2023-01-04 16:51:34,945 - [INFO]: VM request with vm_id = 20 sent at 10.0.
+2023-01-04 16:51:34,945 - [INFO]: VM creation request for vm_id = 20 received at 10.0.
+2023-01-04 16:51:34,945 - [INFO]: VM with vm_id = 20 created and allocated to host_id = 2 of datacenter_id = 0 at 10.0.
+2023-01-04 16:51:34,945 - [INFO]: VM request with vm_id = 20 completed at 10.0.
+2023-01-04 16:51:34,945 - [INFO]: Broker stopped at 10.0.
+2023-01-04 16:51:34,945 - [INFO]: VM destroy request for vm_id = 1 received at 100.0.
+2023-01-04 16:51:34,945 - [INFO]: VM with vm_id = 1 destroyed at 100.0.
+2023-01-04 16:51:34,945 - [INFO]: VM destroy request for vm_id = 2 received at 110.0.
+2023-01-04 16:51:34,945 - [INFO]: VM with vm_id = 2 destroyed at 110.0.
+2023-01-04 16:51:34,946 - [INFO]: VM destroy request for vm_id = 3 received at 110.0.
+2023-01-04 16:51:34,946 - [INFO]: VM with vm_id = 3 destroyed at 110.0.
+2023-01-04 16:51:34,946 - [INFO]: VM destroy request for vm_id = 4 received at 110.0.
+2023-01-04 16:51:34,946 - [INFO]: VM with vm_id = 4 destroyed at 110.0.
+2023-01-04 16:51:34,946 - [INFO]: VM destroy request for vm_id = 5 received at 110.0.
+2023-01-04 16:51:34,946 - [INFO]: VM with vm_id = 5 destroyed at 110.0.
+2023-01-04 16:51:34,946 - [INFO]: VM destroy request for vm_id = 6 received at 110.0.
+2023-01-04 16:51:34,946 - [INFO]: VM with vm_id = 6 destroyed at 110.0.
+2023-01-04 16:51:34,946 - [INFO]: VM destroy request for vm_id = 7 received at 110.0.
+2023-01-04 16:51:34,946 - [INFO]: VM with vm_id = 7 destroyed at 110.0.
+2023-01-04 16:51:34,947 - [INFO]: VM destroy request for vm_id = 8 received at 110.0.
+2023-01-04 16:51:34,947 - [INFO]: VM with vm_id = 8 destroyed at 110.0.
+2023-01-04 16:51:34,947 - [INFO]: VM destroy request for vm_id = 9 received at 110.0.
+2023-01-04 16:51:34,947 - [INFO]: VM with vm_id = 9 destroyed at 110.0.
+2023-01-04 16:51:34,947 - [INFO]: VM destroy request for vm_id = 10 received at 110.0.
+2023-01-04 16:51:34,947 - [INFO]: VM with vm_id = 10 destroyed at 110.0.
+2023-01-04 16:51:34,947 - [INFO]: VM destroy request for vm_id = 11 received at 110.0.
+2023-01-04 16:51:34,947 - [INFO]: VM with vm_id = 11 destroyed at 110.0.
+2023-01-04 16:51:34,947 - [INFO]: VM destroy request for vm_id = 12 received at 110.0.
+2023-01-04 16:51:34,947 - [INFO]: VM with vm_id = 12 destroyed at 110.0.
+2023-01-04 16:51:34,947 - [INFO]: VM destroy request for vm_id = 13 received at 110.0.
+2023-01-04 16:51:34,948 - [INFO]: VM with vm_id = 13 destroyed at 110.0.
+2023-01-04 16:51:34,948 - [INFO]: VM destroy request for vm_id = 14 received at 110.0.
+2023-01-04 16:51:34,948 - [INFO]: VM with vm_id = 14 destroyed at 110.0.
+2023-01-04 16:51:34,948 - [INFO]: VM destroy request for vm_id = 15 received at 110.0.
+2023-01-04 16:51:34,948 - [INFO]: VM with vm_id = 15 destroyed at 110.0.
+2023-01-04 16:51:34,948 - [INFO]: VM destroy request for vm_id = 16 received at 110.0.
+2023-01-04 16:51:34,948 - [INFO]: VM with vm_id = 16 destroyed at 110.0.
+2023-01-04 16:51:34,948 - [INFO]: VM destroy request for vm_id = 17 received at 110.0.
+2023-01-04 16:51:34,948 - [INFO]: VM with vm_id = 17 destroyed at 110.0.
+2023-01-04 16:51:34,948 - [INFO]: VM destroy request for vm_id = 18 received at 110.0.
+2023-01-04 16:51:34,948 - [INFO]: VM with vm_id = 18 destroyed at 110.0.
+2023-01-04 16:51:34,949 - [INFO]: VM destroy request for vm_id = 19 received at 110.0.
+2023-01-04 16:51:34,949 - [INFO]: VM with vm_id = 19 destroyed at 110.0.
+2023-01-04 16:51:34,949 - [INFO]: VM destroy request for vm_id = 20 received at 110.0.
+2023-01-04 16:51:34,949 - [INFO]: VM with vm_id = 20 destroyed at 110.0.

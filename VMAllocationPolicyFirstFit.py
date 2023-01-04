@@ -1,4 +1,10 @@
-from abc import ABC
+"""
+Title:          PyCloudSim
+Description:    A Python-based Cloud Simulation framework
+Author(s):      Mahmoud Momtazpour
+Licence:        GPL - https://www.gnu.org/copyleft/gpl.html
+Copyright (c) 2022-2023, Amirkabir University of Technology, Iran
+"""
 
 from VMAllocationPolicy import VMAllocationPolicy
 

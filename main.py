@@ -1,5 +1,10 @@
-# This is pyCloudSim, a cloud simulator written in Python.
-# It is developed and maintained by M. Momtazpour
+"""
+Title:          PyCloudSim
+Description:    A Python-based Cloud Simulation framework
+Author(s):      Mahmoud Momtazpour
+Licence:        GPL - https://www.gnu.org/copyleft/gpl.html
+Copyright (c) 2022-2023, Amirkabir University of Technology, Iran
+"""
 
 from PyCloudSim import PyCloudSim
 from Host import Host
@@ -18,7 +23,11 @@ from csv import DictReader
 import logging
 
 
-def create_vms():
+def create_vms() -> list[VM]:
+    """Create some VMs manually
+    :return: list of vms
+    :rtype: list[VM]
+    """
     vm_list = []
     num_vms = 2
     logging.info(f'Creating {num_vms} VMs.')
@@ -34,11 +43,18 @@ def create_vms():
     return vm_list
 
 
-def create_vms_from_file():
+def create_vms_from_file(vm_file: str) -> list[VM]:
+    """Create some VMs by importing from a file
+    :param vm_file: a string that includes the path to the file
+    :type vm_file: str
+    :return: list of vms
+    :rtype: list[VM]
+    :raise: raises exception if importing vm_list file fails
+    """
     logging.info(f'Importing VMs from file.')
     vm_list = []
     try:
-        with open('vms.csv', mode='r') as vm_file:
+        with open(vm_file, mode='r') as vm_file:
             vm_dict = DictReader(vm_file)
             for row in vm_dict:
                 vm_list.append(VM(row['vm_id'], row['user_id'], float(row['mips']), float(row['ram']), float(row['bw']),
@@ -50,7 +66,11 @@ def create_vms_from_file():
     return vm_list
 
 
-def create_datacenter():
+def create_datacenter() -> list[Datacenter]:
+    """Create some datacenters
+    :return: list of datacenters
+    :rtype: list[Datacenter]
+    """
     host_list = []
     dc_list = []
     num_hosts = 4
@@ -76,12 +96,24 @@ def create_datacenter():
     return dc_list
 
 
-def create_broker(cloud):
+def create_broker(cloud: Cloud) -> Broker:
+    """Create a broker that submits VMs to the cloud
+    :param cloud: a handle to cloud object
+    :type cloud: Cloud
+    :return: broker
+    :rtype: Broker
+    """
     logging.info(f'Creating the broker.')
     return Broker(cloud)
 
 
-def create_cloud(dc_list):
+def create_cloud(dc_list: list[Datacenter]) -> Cloud:
+    """Create a cloud from the list of data centers
+    :param dc_list: list of datacenters
+    :type dc_list: list[Datacenter]
+    :return: cloud
+    :rtype: Cloud
+    """
     logging.info(f'Creating the cloud.')
     cloud_attributes = {'name': 'my_cloud', 'cloud_id': 1}
     vm_cloud_allocation_policy = VMCloudAllocationPolicy(dc_list)
@@ -93,6 +125,7 @@ def print_hi():
 
 
 def enable_logging():
+    """Enable logging"""
     logging.basicConfig(
         level=logging.INFO,
         format='%(asctime)s - [%(levelname)s]: %(message)s',
@@ -109,19 +142,21 @@ if __name__ == '__main__':
     datacenters = create_datacenter()
     cloud = create_cloud(datacenters)
 
-    # 2) Create VM(s)
-    vms = create_vms_from_file()
+    # 2) Create VM(s) either manually or from a file
+    vms = create_vms_from_file('vms.csv')
+    # vms = create_vms()
 
     # 3) Create a Broker and submit VMs to it
     broker = create_broker(cloud)
     broker.submit_vm_list(vms)
 
-    # 4) Create and Initialize Simulation environment and processes
+    # 4) Create and initialize simulation environment and event processors
     sim_time = 10000
     sim = PyCloudSim(sim_time, broker, datacenters, vms)
 
-    # 5) Initialize and Start the simulation
+    # 5) Start the simulation
     sim.start_simulation()
 
-    # 5) Finalize Results
+    # 5) Stop the simulation and finalize Results
     sim.stop_simulation()
+    print('Simulation Finished.')

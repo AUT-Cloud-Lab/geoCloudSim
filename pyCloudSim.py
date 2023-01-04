@@ -1,4 +1,13 @@
+"""
+Title:          PyCloudSim
+Description:    A Python-based Cloud Simulation framework
+Author(s):      Mahmoud Momtazpour
+Licence:        GPL - https://www.gnu.org/copyleft/gpl.html
+Copyright (c) 2022-2023, Amirkabir University of Technology, Iran
+"""
+
 import simpy
+import logging
 
 
 class PyCloudSim(object):
@@ -7,6 +16,7 @@ class PyCloudSim(object):
     """
 
     def __init__(self, sim_time, broker, datacenter_list, vm_list):
+        logging.info(f'Creating PyCloudSim environment.')
         if isinstance(sim_time, int) and sim_time > 0:
             self._sim_time = sim_time
         else:
@@ -16,8 +26,6 @@ class PyCloudSim(object):
         self._datacenter_list = datacenter_list
         self._vm_list = vm_list
         self._env.process(self._broker.start_run(self._env, sim_time))
-        #for dc in self._datacenter_list:
-          #  self._env.process(dc.start_run(self._env, sim_time))
 
     def get_sim_time(self):
         return self._sim_time
@@ -32,6 +40,7 @@ class PyCloudSim(object):
         self._env = env
 
     def start_simulation(self):
+        logging.info(f'Starting simulation.')
         self.get_env().run(until=self.get_sim_time())
 
     def stop_simulation(self):
