@@ -1,5 +1,6 @@
 import simpy
 from simpy.util import start_delayed
+import logging
 
 
 class Broker:
@@ -23,7 +24,7 @@ class Broker:
     def start_run(self, env, sim_time):
         self._env = env
         self._sim_time = sim_time
-        print(f'broker started at {env.now}')
+        logging.info(f'Broker started at {env.now}.')
         dc = self._datacenter_list[0]
         for vm in self._vm_list:
             vm_delay = vm.get_arrival_time() - env.now
@@ -32,22 +33,15 @@ class Broker:
                 yield env.process(self.send_request(env, request))
             else:
                 yield start_delayed(env, self.send_request(env, request), delay=vm_delay)
-
-        #
-        # dc.start_run(env, sim_time)
-        # yield self._env.process(dc.run())
-
-        print(f'broker stopped at {env.now}')
+        logging.info(f'Broker stopped at {env.now}.')
 
     def send_request(self, env, request):
         if request['type'] == 'vm_create':
             dc = request['dc']
             vm = request['vm']
-            print(f'vm request with vm_id = {vm.get_id()} sent at {env.now}')
+            logging.info(f'VM request with vm_id = {vm.get_id()} sent at {env.now}.')
             yield env.process(dc.process_vm_create(env, vm))
-            print(f'vm request with vm_id = {vm.get_id()} completed at {env.now}')
-
-
+            logging.info(f'VM request with vm_id = {vm.get_id()} completed at {env.now}.')
 
     def run(self):
         while True:

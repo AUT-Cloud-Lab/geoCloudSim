@@ -1,33 +1,23 @@
 from abc import ABC
 
 from VMAllocationPolicy import VMAllocationPolicy
-from heapq import heappush, heappop
 
 
-class VMAllocationPolicyLeastMips(VMAllocationPolicy):
+class VMAllocationPolicyFirstFit(VMAllocationPolicy):
     """
-    This policy tries to allocate a host with minimum available Mips
+    This policy tries to allocate the first host that have enough capacity for the VM
     """
     def __init__(self, host_list):
         super().__init__(host_list)
         self._vm_table = dict()
 
     def allocate_host_for_vm(self, vm):
-        suitable_hosts = []
         for host in self.get_host_list():
             if host.is_suitable_for_vm(vm):
-                suitable_hosts.append(host)
-        if not suitable_hosts:
-            print(f'no suitable host for vm with vm_id = {vm.get_id()}')
-            return False
-        heap_mips = []
-        for host in suitable_hosts:
-            heappush(heap_mips, (host.get_available_mips(), host.get_id(), host))
-        for i in range(len(heap_mips)):
-            host = heappop(heap_mips)[2]
-            if host.vm_create(vm):
-                self._vm_table[vm.get_vm_uid()] = host
-                return True
+                if host.vm_create(vm):
+                    self._vm_table[vm.get_vm_uid()] = host
+                    return True
+        print(f'no suitable host for vm with vm_id = {vm.get_id()}')
         return False
 
     def optimize_allocation(self, vm_list):
