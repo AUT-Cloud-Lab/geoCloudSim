@@ -1,6 +1,6 @@
 """
 Title:          PyCloudSim
-Description:    A Python-based Cloud Simulation framework
+Description:    A Python-based Cloud Simulator
 Author(s):      Mahmoud Momtazpour
 Licence:        GPL - https://www.gnu.org/copyleft/gpl.html
 Copyright (c) 2022-2023, Amirkabir University of Technology, Iran
@@ -12,7 +12,17 @@ import logging
 
 class PyCloudSim(object):
     """
-    This is pyCloudSim class, which is used to initialize, start and stop the simulator
+    PyCloudSim class definition: It is responsible for initializing, starting and stopping the simulator
+    :ivar _sim_time: simulation time
+    :type _sim_time: int
+    :ivar _env: simulation environment
+    :type _env: simpy env
+    :ivar _vm_list: list of VMs that to be processed
+    :type _vm_list: list[VM]
+    :ivar _datacenter_list: list of datacenters
+    :type _datacenter_list: list[Datacenter]
+    :ivar _broker: an instance of Broker
+    :type _broker: Broker
     """
 
     def __init__(self, sim_time, broker, datacenter_list, vm_list):
