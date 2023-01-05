@@ -120,6 +120,7 @@ class Datacenter:
 
     def send_ack(self, ack):
         self._env.process(self._cloud.process_ack(ack))
+        pass
 
     def get_id(self):
         return self._datacenter_id

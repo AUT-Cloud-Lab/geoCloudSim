@@ -58,7 +58,7 @@ class Cloud:
             dc = self._dc_selection_policy.select_dc_for_vm(vm)
             logging.info(f'VM with vm_id = {vm.get_id()} sent to datacenter_id = {dc.get_id()}'
                          f' at {self._env.now}.')
-            self._env.process(dc.process_vm_create(vm, self._vm_create_events[vm.get_id()]))
+            yield self._env.process(dc.process_vm_create(vm, self._vm_create_events[vm.get_id()]))
             yield self._vm_create_events[vm.get_id()]
             if self._vm_create_events[vm.get_id()].value:
                 logging.info(f'VM with vm_id = {vm.get_id()} created on datacenter_id = {dc.get_id()}'

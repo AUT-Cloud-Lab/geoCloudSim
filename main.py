@@ -15,6 +15,7 @@ from StorageProvisioner import StorageProvisioner
 from VMAllocationPolicyFirstFit import VMAllocationPolicyFirstFit
 from VMAllocationPolicyLeastMips import VMAllocationPolicyLeastMips
 from DCSelectionPolicyFirstFit import DCSelectionPolicyFirstFit
+from DCSelectionPolicyRoundRobin import DCSelectionPolicyRoundRobin
 from Datacenter import Datacenter
 from Broker import Broker
 from Cloud import Cloud
@@ -118,7 +119,7 @@ def create_cloud(dc_list: list[Datacenter]) -> Cloud:
     """
     logging.info(f'Creating the cloud.')
     cloud_attributes = {'cloud_id': 1}
-    dc_selection_policy = DCSelectionPolicyFirstFit(dc_list)
+    dc_selection_policy = DCSelectionPolicyRoundRobin(dc_list)
     return Cloud(cloud_attributes, dc_list, dc_selection_policy)
 
 
