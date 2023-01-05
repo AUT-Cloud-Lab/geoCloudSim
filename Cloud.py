@@ -22,6 +22,8 @@ class Cloud:
     :type _dc_selection_policy: VMAllocationPolicy or its subclasses
     :ivar _dc_list: list of datacenters in this cloud
     :type _dc_list: list[Datacenter]
+    :ivar _broker: an instance of the Broker class
+    :type _broker: Broker
     """
 
     def __init__(self, cloud_attributes, dc_list, dc_selection_policy):
