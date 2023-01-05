@@ -6,8 +6,10 @@ Licence:        GPL - https://www.gnu.org/copyleft/gpl.html
 Copyright (c) 2022-2023, Amirkabir University of Technology, Iran
 """
 
+from DCSelectionPolicy import DCSelectionPolicy
 
-class DCSelectionPolicyRoundRobin:
+
+class DCSelectionPolicyRoundRobin(DCSelectionPolicy):
     def __init__(self, datacenter_list):
         self._datacenter_list = datacenter_list
         self._vm_table = dict()
