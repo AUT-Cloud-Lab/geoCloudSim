@@ -28,7 +28,7 @@ class Cloud:
 
     def __init__(self, cloud_attributes, dc_list, dc_selection_policy):
         self._env = None
-        self._sim_time = None
+        self._sim_time = -1
         self._cloud_id = cloud_attributes['cloud_id']
         self._dc_selection_policy = dc_selection_policy
         self._dc_list = dc_list
@@ -60,7 +60,7 @@ class Cloud:
                 self._dc_selection_policy.accept_selection()
                 break
             else:
-                result = self._dc_selection_policy.reject_selection()
+                self._dc_selection_policy.reject_selection()
                 self._dc_tried = self._dc_tried + 1
         if self._dc_tried == len(self._dc_list):
             logging.warning(f'VM with vm_id = {vm.get_id()} not created on any datacenter.')
