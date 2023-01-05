@@ -37,14 +37,14 @@ class Cloud:
         self._dc_tried = 0
         self._vm_create_events = {}
         if not dc_list:
-            raise ValueError('The Cloud has no Datacenter in its DatacenterList')
+            raise ValueError('The Cloud has no Datacenter in its DatacenterList.')
         for dc in self._dc_list:
             dc.set_cloud(self)
 
     def start_run(self, env, sim_time):
         self._env = env
         self._sim_time = sim_time
-        logging.info(f'cloud started at {env.now}')
+        logging.info(f'Cloud started at {env.now}.')
         yield env.timeout(0)
 
     def get_dc_list(self):
@@ -58,11 +58,9 @@ class Cloud:
             dc = self._dc_selection_policy.select_dc_for_vm(vm)
             logging.info(f'VM with vm_id = {vm.get_id()} sent to datacenter_id = {dc.get_id()}'
                          f' at {self._env.now}.')
-            yield self._env.process(dc.process_vm_create(vm, self._vm_create_events[vm.get_id()]))
-            yield self._vm_create_events[vm.get_id()]
-            if self._vm_create_events[vm.get_id()].value:
-                logging.info(f'VM with vm_id = {vm.get_id()} created on datacenter_id = {dc.get_id()}'
-                             f' at {self._env.now}.')
+            status = dc.process_vm_create(vm)
+            #yield self._vm_create_events[vm.get_id()]
+            if status:
                 self._dc_selection_policy.accept_selection()
                 break
             else:
@@ -72,7 +70,7 @@ class Cloud:
                 else:
                     logging.warning(f'VM with vm_id = {vm.get_id()} not created on all datacenters')
                     ack = {'type': 'vm_create', 'dest': 'broker', 'vm_id': vm.get_id(),
-                           'message': f'VM with vm_id = {vm.get_id()} not created on all datacenters'}
+                           'message': f'VM with vm_id = {vm.get_id()} not created on any datacenter.'}
                     self.send_ack(ack)
                     break
         yield self._env.timeout(0)
