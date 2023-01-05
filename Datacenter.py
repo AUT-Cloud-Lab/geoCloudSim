@@ -99,16 +99,9 @@ class Datacenter:
         result = self._vm_allocation_policy.allocate_host_for_vm(vm)
         if result:
             start_delayed(self._env, self.process_vm_destroy(vm), delay=vm.get_duration())
-            # ack = {'type': 'vm_create', 'dest': 'cloud', 'vm_id': vm.get_id(), 'status': 'created',
-            #       'dc_id': self._datacenter_id,
-            #       'message': f'VM with vm_id = {vm.get_id()} created and allocated to host_id = '
-            #                 f'{vm.get_host().get_id()} of datacenter_id = {self._datacenter_id} at {self._env.now}.'}
             logging.info(f'VM with vm_id = {vm.get_id()} created and allocated to host_id = '
                          f'{vm.get_host().get_id()} of datacenter_id = {self._datacenter_id} at {self._env.now}.')
         else:
-            # ack = {'type': 'vm_create', 'dest': 'cloud', 'vm_id': vm.get_id(), 'dc_id': self._datacenter_id,
-            #       'status': 'not created', 'message': f'VM with vm_id = {vm.get_id()} not created on datacenter_id = '
-            #                                           f'{self._datacenter_id}'}
             logging.warning(f'VM with vm_id = {vm.get_id()} not created on datacenter_id = '
                             f'{self._datacenter_id}.')
         return result
