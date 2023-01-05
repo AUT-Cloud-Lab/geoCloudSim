@@ -28,7 +28,7 @@ class VMAllocationPolicyLeastMips(VMAllocationPolicy):
             if host.is_suitable_for_vm(vm):
                 suitable_hosts.append(host)
         if not suitable_hosts:
-            logging.warning(f'no suitable host for vm with vm_id = {vm.get_id()}')
+            logging.warning(f'No suitable host for vm with vm_id = {vm.get_id()}.')
             return False
         heap_mips = []
         for host in suitable_hosts:
