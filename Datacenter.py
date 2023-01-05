@@ -76,9 +76,8 @@ class Datacenter:
     def start_run(self, env, sim_time):
         self._env = env
         self._sim_time = sim_time
-        logging.info('Datacenter process started.')
-        # yield env.timeout(1)
-        logging.info('Datacenter process stopped.')
+        logging.info(f'Datacenter {self._datacenter_id} started at {env.now}.')
+        yield env.timeout(0)
 
     def set_cloud(self, cloud):
         self._cloud = cloud
@@ -93,19 +92,34 @@ class Datacenter:
                 print('What?!')
                 break
 
-    def process_vm_create(self, env, vm):
-        logging.info(f'VM creation request for vm_id = {vm.get_id()} received at {env.now}.')
+    def process_vm_create(self, vm, event):
+        logging.info(f'VM creation request for vm_id = {vm.get_id()} received at datacenter_id = {self._datacenter_id} '
+                     f'at {self._env.now}.')
         result = self._vm_allocation_policy.allocate_host_for_vm(vm)
         if result:
-            logging.info(f'VM with vm_id = {vm.get_id()} created and allocated to host_id = {vm.get_host().get_id()} of' 
-                         f' datacenter_id = {self._datacenter_id} at {env.now}.')
-            start_delayed(env, self.process_vm_destroy(env, vm), delay=vm.get_duration())
+            start_delayed(self._env, self.process_vm_destroy(vm), delay=vm.get_duration())
+            ack = {'type': 'vm_create', 'dest': 'cloud', 'vm_id': vm.get_id(), 'status': 'created',
+                   'dc_id': self._datacenter_id,
+                   'message': f'VM with vm_id = {vm.get_id()} created and allocated to host_id = '
+                              f'{vm.get_host().get_id()} of datacenter_id = {self._datacenter_id} at {self._env.now}.'}
+            event.succeed(1)
+            self.send_ack(ack)
         else:
-            logging.warning(f'VM with vm_id = {vm.get_id()} not created.')
-        yield env.timeout(0)
+            ack = {'type': 'vm_create', 'dest': 'cloud', 'vm_id': vm.get_id(), 'dc_id': self._datacenter_id,
+                   'status': 'not created', 'message': f'VM with vm_id = {vm.get_id()} not created on datacenter_id = '
+                                                       f'{self._datacenter_id}'}
+            event.succeed(0)
+            self.send_ack(ack)
+        yield self._env.timeout(0)
 
-    def process_vm_destroy(self, env, vm):
-        logging.info(f'VM destroy request for vm_id = {vm.get_id()} received at {env.now}.')
+    def process_vm_destroy(self, vm):
+        logging.info(f'VM destroy request for vm_id = {vm.get_id()} received at {self._env.now}.')
         self._vm_allocation_policy.deallocate_host_for_vm(vm)
-        logging.info(f'VM with vm_id = {vm.get_id()} destroyed at {env.now}.')
-        yield env.timeout(0)
+        logging.info(f'VM with vm_id = {vm.get_id()} destroyed at {self._env.now}.')
+        yield self._env.timeout(0)
+
+    def send_ack(self, ack):
+        self._env.process(self._cloud.process_ack(ack))
+
+    def get_id(self):
+        return self._datacenter_id

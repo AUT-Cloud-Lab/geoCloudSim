@@ -5,6 +5,7 @@ Author(s):      Mahmoud Momtazpour
 Licence:        GPL - https://www.gnu.org/copyleft/gpl.html
 Copyright (c) 2022-2023, Amirkabir University of Technology, Iran
 """
+import logging
 
 from VMAllocationPolicy import VMAllocationPolicy
 
@@ -27,7 +28,7 @@ class VMAllocationPolicyFirstFit(VMAllocationPolicy):
                 if host.vm_create(vm):
                     self._vm_table[vm.get_vm_uid()] = host
                     return True
-        print(f'no suitable host for vm with vm_id = {vm.get_id()}')
+        logging.warning(f'no suitable host for vm with vm_id = {vm.get_id()}')
         return False
 
     def optimize_allocation(self, vm_list):

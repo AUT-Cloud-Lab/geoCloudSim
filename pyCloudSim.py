@@ -19,13 +19,13 @@ class PyCloudSim(object):
     :type _env: simpy env
     :ivar _vm_list: list of VMs that to be processed
     :type _vm_list: list[VM]
-    :ivar _datacenter_list: list of datacenters
-    :type _datacenter_list: list[Datacenter]
+    :ivar _cloud: an instance of Cloud class
+    :type _cloud: Cloud
     :ivar _broker: an instance of Broker
     :type _broker: Broker
     """
 
-    def __init__(self, sim_time, broker, datacenter_list, vm_list):
+    def __init__(self, sim_time, broker, cloud, vm_list):
         logging.info(f'Creating PyCloudSim environment.')
         if isinstance(sim_time, int) and sim_time > 0:
             self._sim_time = sim_time
@@ -33,9 +33,12 @@ class PyCloudSim(object):
             raise ValueError('The value should be a positive integer.')
         self._env = simpy.Environment()
         self._broker = broker
-        self._datacenter_list = datacenter_list
+        self._cloud = cloud
+        self._datacenter_list = cloud.get_dc_list()
         self._vm_list = vm_list
         self._env.process(self._broker.start_run(self._env, sim_time))
+        [self._env.process(dc.start_run(self._env, sim_time)) for dc in self._datacenter_list]
+        self._env.process(self._cloud.start_run(self._env, sim_time))
 
     def get_sim_time(self):
         return self._sim_time
@@ -54,4 +57,5 @@ class PyCloudSim(object):
         self.get_env().run(until=self.get_sim_time())
 
     def stop_simulation(self):
-        pass
+        logging.info('Simulation Finished.')
+

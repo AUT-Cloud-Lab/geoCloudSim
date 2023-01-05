@@ -71,21 +71,22 @@ class Broker:
         dc = self._datacenter_list[0]
         for vm in self._vm_list:
             vm_delay = vm.get_arrival_time() - env.now
-            request = {'dest': 'datacenter', 'type': 'vm_create', 'vm': vm, 'dc': dc}
+            request = {'dest': 'cloud', 'type': 'vm_create', 'vm': vm}
             if vm_delay == 0:
-                yield env.process(self.send_request(env, request))
+                yield env.process(self.send_request(request))
             else:
-                yield start_delayed(env, self.send_request(env, request), delay=vm_delay)
+                yield start_delayed(env, self.send_request(request), delay=vm_delay)
         logging.info(f'Broker stopped at {env.now}.')
 
-    def send_request(self, env, request):
+    def send_request(self, request):
         """ Sending request (VM creation, etc.) to Cloud/Datacenters
-        :param env: the simulation environment
         :param request:  a dictionary containing the request type, destination, etc.
         """
-        if request['type'] == 'vm_create':
-            dc = request['dc']
+        if request['type'] == 'vm_create' and request['dest'] == 'cloud':
             vm = request['vm']
-            logging.info(f'VM creation request with vm_id = {vm.get_id()} sent at {env.now}.')
-            yield env.process(dc.process_vm_create(env, vm))
-            logging.info(f'VM creation request with vm_id = {vm.get_id()} completed at {env.now}.')
+            logging.info(f'VM creation request with vm_id = {vm.get_id()} sent to cloud at {self._env.now}.')
+            yield self._env.process(self._cloud.process_vm_create(vm))
+
+    def process_ack(self, ack):
+        logging.info(ack['message'])
+

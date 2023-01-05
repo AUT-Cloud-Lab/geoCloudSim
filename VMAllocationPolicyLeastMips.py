@@ -5,7 +5,7 @@ Author(s):      Mahmoud Momtazpour
 Licence:        GPL - https://www.gnu.org/copyleft/gpl.html
 Copyright (c) 2022-2023, Amirkabir University of Technology, Iran
 """
-
+import logging
 from VMAllocationPolicy import VMAllocationPolicy
 from heapq import heappush, heappop
 
@@ -28,7 +28,7 @@ class VMAllocationPolicyLeastMips(VMAllocationPolicy):
             if host.is_suitable_for_vm(vm):
                 suitable_hosts.append(host)
         if not suitable_hosts:
-            print(f'no suitable host for vm with vm_id = {vm.get_id()}')
+            logging.warning(f'no suitable host for vm with vm_id = {vm.get_id()}')
             return False
         heap_mips = []
         for host in suitable_hosts:

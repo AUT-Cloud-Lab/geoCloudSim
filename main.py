@@ -14,7 +14,7 @@ from MipsProvisioner import MipsProvisioner
 from StorageProvisioner import StorageProvisioner
 from VMAllocationPolicyFirstFit import VMAllocationPolicyFirstFit
 from VMAllocationPolicyLeastMips import VMAllocationPolicyLeastMips
-from DCSelectionPolicy import DCSelectionPolicy
+from DCSelectionPolicyFirstFit import DCSelectionPolicyFirstFit
 from Datacenter import Datacenter
 from Broker import Broker
 from Cloud import Cloud
@@ -71,26 +71,28 @@ def create_datacenter() -> list[Datacenter]:
     :return: list of datacenters
     :rtype: list[Datacenter]
     """
-    host_list = []
     dc_list = []
     num_hosts = 2
-    num_dcs = 1
+    num_dcs = 2
     logging.info(f'Creating {num_dcs} datacenters, each with {num_hosts} hosts.')
     # adding some homogeneous hosts
     mips = 1000  # host MIPS
     ram = 2048  # host memory(MB)
     storage = 1000000  # host storage (MB)
     bw = 100000  # host network bandwidth (MB/s)
-    for host_id in range(num_hosts):
-        ram_provisioner = RamProvisioner(ram)
-        mips_provisioner = MipsProvisioner(mips)
-        storage_provisioner = StorageProvisioner(storage)
-        bw_provisioner = BwProvisioner(bw)
-        host_list.append(Host(host_id, ram_provisioner, bw_provisioner, storage_provisioner, mips_provisioner))
-    datacenter_attributes = {'arch': 'x86', 'os': 'Linux', 'vmm': 'Xen', 'time_zone': 10.0,
-                             'cost_per_mips': 3.0, 'cost_per_ram': 0.05, 'cost_per_storage': 0.001, 'cost_per_bw': 0.0}
-    scheduling_interval = 0
+
     for dc_id in range(num_dcs):
+        host_list = []
+        for host_id in range(num_hosts):
+            ram_provisioner = RamProvisioner(ram)
+            mips_provisioner = MipsProvisioner(mips)
+            storage_provisioner = StorageProvisioner(storage)
+            bw_provisioner = BwProvisioner(bw)
+            host_list.append(Host(host_id, ram_provisioner, bw_provisioner, storage_provisioner, mips_provisioner))
+        datacenter_attributes = {'arch': 'x86', 'os': 'Linux', 'vmm': 'Xen', 'time_zone': 10.0,
+                                 'cost_per_mips': 3.0, 'cost_per_ram': 0.05, 'cost_per_storage': 0.001,
+                                 'cost_per_bw': 0.0}
+        scheduling_interval = 0
         vm_allocation_policy = VMAllocationPolicyLeastMips(host_list)
         dc_list.append(Datacenter(dc_id, datacenter_attributes, vm_allocation_policy, scheduling_interval, host_list))
     return dc_list
@@ -116,12 +118,8 @@ def create_cloud(dc_list: list[Datacenter]) -> Cloud:
     """
     logging.info(f'Creating the cloud.')
     cloud_attributes = {'cloud_id': 1}
-    dc_selection_policy = DCSelectionPolicy(dc_list)
+    dc_selection_policy = DCSelectionPolicyFirstFit(dc_list)
     return Cloud(cloud_attributes, dc_list, dc_selection_policy)
-
-
-def print_hi():
-    print(f'Welcome to PyCloudSim')
 
 
 def enable_logging():
@@ -129,12 +127,12 @@ def enable_logging():
     logging.basicConfig(
         level=logging.INFO,
         format='%(asctime)s - [%(levelname)s]: %(message)s',
-        filename='simulation.log')  # pass explicit filename here
-    print('Logging enabled')
+        filename='simulation.log', filemode="w")  # pass explicit filename here
+    logging.getLogger().addHandler(logging.StreamHandler())
+    logging.info('Logging enabled')
 
 
 if __name__ == '__main__':
-    print_hi()
     enable_logging()
     logging.info(f'Initializing PyCloudSim...')
 
@@ -149,14 +147,15 @@ if __name__ == '__main__':
     # 3) Create a Broker and submit VMs to it
     broker = create_broker(cloud)
     broker.submit_vm_list(vms)
+    cloud.set_broker(broker)
 
     # 4) Create and initialize simulation environment and event processors
     sim_time = 10000
-    sim = PyCloudSim(sim_time, broker, datacenters, vms)
+    sim = PyCloudSim(sim_time, broker, cloud, vms)
 
     # 5) Start the simulation
     sim.start_simulation()
 
     # 5) Stop the simulation and finalize Results
     sim.stop_simulation()
-    print('Simulation Finished.')
+
