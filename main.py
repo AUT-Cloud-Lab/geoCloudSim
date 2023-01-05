@@ -73,7 +73,7 @@ def create_datacenter() -> list[Datacenter]:
     :rtype: list[Datacenter]
     """
     dc_list = []
-    num_hosts = 2
+    num_hosts = 1
     num_dcs = 2
     logging.info(f'Creating {num_dcs} datacenters, each with {num_hosts} hosts.')
     # adding some homogeneous hosts
@@ -119,7 +119,7 @@ def create_cloud(dc_list: list[Datacenter]) -> Cloud:
     """
     logging.info(f'Creating the cloud.')
     cloud_attributes = {'cloud_id': 1}
-    dc_selection_policy = DCSelectionPolicyFirstFit(dc_list)
+    dc_selection_policy = DCSelectionPolicyRoundRobin(dc_list)
     return Cloud(cloud_attributes, dc_list, dc_selection_policy)
 
 

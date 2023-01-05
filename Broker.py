@@ -6,14 +6,14 @@ Licence:        GPL - https://www.gnu.org/copyleft/gpl.html
 Copyright (c) 2022-2023, Amirkabir University of Technology, Iran
 """
 
-import simpy
+
 from simpy.util import start_delayed
 import logging
 
 
 class Broker:
     """ Broker class definition: It is responsible for sending VMs request (creation, submission, destruction) to Cloud
-    on behalf of users.
+    on behalf of users
     :ivar _sim_time: simulation time
     :type _sim_time: int
     :ivar _env: simulation environment
@@ -24,8 +24,8 @@ class Broker:
     :type _vms_created_list: list[VM]
     :ivar _vms_requested: number of VM creation requests
     :type _vms_requested: int
-    :ivar _vms_acks: number of VM creation request acknowledgement
-    :type _vms_acks: int
+    :ivar _vms_ack: number of VM creation request acknowledgement
+    :type _vms_ack: int
     :ivar _vms_destroyed: number of VM destroyed
     :type _vms_destroyed: int
     :ivar _datacenter_list: list of datacenters
@@ -41,18 +41,17 @@ class Broker:
         """ Constructor
         :param cloud: the cloud instance that includes all datacenters
         """
-        self._sim_time = None
+        self._sim_time = -1
         self._env = None
         self._vm_list = []
         self._vms_created_list = []
         self._vms_requested = 0
-        self._vms_acks = 0
+        self._vms_ack = 0
         self._vms_destroyed = 0
         self._datacenter_list = cloud.get_dc_list()
         self._datacenter_requested_ids_list = []
         self._vms_datacenter_map = dict()
         self._cloud = cloud
-        # self._datacenter_characteristics_map = dict()
 
     def submit_vm_list(self, vm_list):
         """ Submit the list of VMs to the broker
@@ -68,7 +67,6 @@ class Broker:
         self._env = env
         self._sim_time = sim_time
         logging.info(f'Broker started at {env.now}.')
-        dc = self._datacenter_list[0]
         for vm in self._vm_list:
             vm_delay = vm.get_arrival_time() - env.now
             request = {'dest': 'cloud', 'type': 'vm_create', 'vm': vm}
@@ -88,5 +86,6 @@ class Broker:
             yield self._env.process(self._cloud.process_vm_create(vm))
 
     def process_ack(self, ack):
+        print('I am broker, receiving ack from cloud! yoohoo')
         logging.info(ack['message'])
-
+        yield self._env.timeout(0)

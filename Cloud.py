@@ -49,7 +49,7 @@ class Cloud:
     def process_vm_create(self, vm):
         logging.info(f'VM creation request for vm_id = {vm.get_id()} received at cloud at {self._env.now}.')
         self._dc_tried = 0
-        while self._dc_tried <= len(self._dc_list):
+        while self._dc_tried < len(self._dc_list):
             dc = self._dc_selection_policy.select_dc_for_vm(vm)
             logging.info(f'VM with vm_id = {vm.get_id()} sent to datacenter_id = {dc.get_id()}'
                          f' at {self._env.now}.')
@@ -59,14 +59,12 @@ class Cloud:
                 break
             else:
                 result = self._dc_selection_policy.reject_selection()
-                if result:
-                    self._dc_tried = self._dc_tried + 1
-                else:
-                    logging.warning(f'VM with vm_id = {vm.get_id()} not created on any datacenter.')
-                    ack = {'type': 'vm_create', 'dest': 'broker', 'vm_id': vm.get_id(),
-                           'message': f'VM with vm_id = {vm.get_id()} not created on any datacenter.'}
-                    self.send_ack(ack)
-                    break
+                self._dc_tried = self._dc_tried + 1
+        if self._dc_tried == len(self._dc_list):
+            logging.warning(f'VM with vm_id = {vm.get_id()} not created on any datacenter.')
+            ack = {'type': 'vm_create', 'dest': 'broker', 'vm_id': vm.get_id(),
+                   'message': f'VM with vm_id = {vm.get_id()} not created on any datacenter.'}
+            yield self._env.process(self.send_ack(ack))
         yield self._env.timeout(0)
 
     def process_ack(self, ack):
@@ -78,7 +76,7 @@ class Cloud:
 
     def send_ack(self, ack):
         if ack['dest'] == 'broker':
-            self._env.process(self._broker.process_ack(ack))
+            yield self._env.process(self._broker.process_ack(ack))
         yield self._env.timeout(0)
 
     def set_broker(self, broker):

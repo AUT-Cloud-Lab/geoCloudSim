@@ -17,10 +17,7 @@ class DCSelectionPolicyFirstFit:
         return self._datacenter_list[self._last_selected]
 
     def reject_selection(self):
-        if self._last_selected + 1 >= len(self._datacenter_list):
-            return False
-        else:
-            self._last_selected = self._last_selected + 1
-            return True
+        self._last_selected = (self._last_selected + 1) % len(self._datacenter_list)
+
     def accept_selection(self):
         self._last_selected = 0
