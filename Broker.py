@@ -57,7 +57,7 @@ class Broker:
         """ Submit the list of VMs to the broker
         :param vm_list: list of VMs
         """
-        [self._vm_list.append(vm) for vm in vm_list]
+        self._vm_list.extend(vm_list)
 
     def start_run(self, env, sim_time):
         """Start the broker event processor
@@ -71,6 +71,7 @@ class Broker:
             vm_delay = vm.get_arrival_time() - env.now
             request = {'dest': 'cloud', 'type': 'vm_create', 'vm': vm}
             if vm_delay == 0:
+                # TODO maybe sending interrupt be better than creating process
                 yield env.process(self.send_request(request))
             else:
                 yield start_delayed(env, self.send_request(request), delay=vm_delay)
@@ -87,5 +88,6 @@ class Broker:
 
     def process_ack(self, ack):
         print('I am broker, receiving ack from cloud! yoohoo')
+        # Todo: should do somthing with the ack, for example count created/not created VMs
         logging.info(ack['message'])
         yield self._env.timeout(0)

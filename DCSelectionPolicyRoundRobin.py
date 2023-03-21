@@ -11,7 +11,7 @@ from DCSelectionPolicy import DCSelectionPolicy
 
 class DCSelectionPolicyRoundRobin(DCSelectionPolicy):
     def __init__(self, datacenter_list):
-        self._datacenter_list = datacenter_list
+        super().__init__(datacenter_list)
         self._vm_table = dict()
         self._last_selected = 1
 

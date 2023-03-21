@@ -39,6 +39,8 @@ def create_vms() -> list[VM]:
     bw = 1000  # host network bandwidth (MB/s)
     vmm = "Xen"  # Virtual Machine Monitor
     user_id = 1  # same user ID for all VMs
+    arrival_time = 0  # same arrival time for all VMs
+    duration = 10  # same duration for all VMs
     for vm_id in range(num_vms):
         vm_list.append(VM(vm_id, user_id, mips, ram, bw, storage, vmm))
     return vm_list
