@@ -9,6 +9,7 @@ Copyright (c) 2022-2023, Amirkabir University of Technology, Iran
 import simpy
 from simpy.util import start_delayed
 import logging
+from logger import log_me
 
 
 class Datacenter:
@@ -69,7 +70,7 @@ class Datacenter:
         self._host_list = host_list
         self._cloud = None
         if not host_list:
-            logging.error('The Data center has no Host in its HostList.')
+            # logging.error('The Data center has no Host in its HostList.')
             raise ValueError('The Data center has no Host in its HostList')
         for host in self._host_list:
             host.set_datacenter(self)
@@ -77,7 +78,8 @@ class Datacenter:
     def start_run(self, env, sim_time):
         self._env = env
         self._sim_time = sim_time
-        logging.info(f'Datacenter {self._datacenter_id} started at {env.now}.')
+        log_me('INFO', int(env.now), 'Datacenter', 'Started',
+               dc_id=self._datacenter_id)
         yield env.timeout(0)
 
     def set_cloud(self, cloud):
@@ -86,30 +88,27 @@ class Datacenter:
     def run(self):
         while True:
             try:
-                logging.info('dc running')
-                yield self._env.timeout(self._sim_time - self._env.now - 10)
-                logging.info('dc stopped')
+                # logging.info('dc running')
+                yield self._env.timeout(self._sim_time - int(self._env.now) - 10)
+                # logging.info('dc stopped')
             except simpy.Interrupt:
                 print('What?!')
                 break
 
     def process_vm_create(self, vm):
-        logging.info(f'VM creation request for vm_id = {vm.get_id()} received at datacenter_id = {self._datacenter_id} '
-                     f'at {self._env.now}.')
+        log_me('INFO', int(self._env.now), 'Datacenter', 'VM creation request received', vm.get_id(), self._datacenter_id)
         result = self._vm_allocation_policy.allocate_host_for_vm(vm)
         if result:
             start_delayed(self._env, self.process_vm_destroy(vm), delay=vm.get_duration())
-            logging.info(f'VM with vm_id = {vm.get_id()} created and allocated to host_id = '
-                         f'{vm.get_host().get_id()} of datacenter_id = {self._datacenter_id} at {self._env.now}.')
+            log_me('INFO', int(self._env.now), 'Datacenter', 'VM created and allocated', vm.get_id(), self._datacenter_id, vm.get_host().get_id())
         else:
-            logging.warning(f'VM with vm_id = {vm.get_id()} not created on datacenter_id = '
-                            f'{self._datacenter_id}.')
+            log_me('WARN', int(self._env.now), 'Datacenter', 'VM not created', vm.get_id(), self._datacenter_id)
         return result
 
     def process_vm_destroy(self, vm):
-        logging.info(f'VM destroy request for vm_id = {vm.get_id()} received at {self._env.now}.')
+        log_me('INFO', int(self._env.now), 'Datacenter', 'VM destroy request received', vm.get_id(), self._datacenter_id)
         self._vm_allocation_policy.deallocate_host_for_vm(vm)
-        logging.info(f'VM with vm_id = {vm.get_id()} destroyed at {self._env.now}.')
+        log_me('INFO', int(self._env.now), 'Datacenter', 'VM destroyed', vm.get_id(), self._datacenter_id)
         yield self._env.timeout(0)
 
     def send_ack(self, ack):

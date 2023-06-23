@@ -6,7 +6,7 @@ Licence:        GPL - https://www.gnu.org/copyleft/gpl.html
 Copyright (c) 2022-2023, Amirkabir University of Technology, Iran
 """
 
-from DCSelectionPolicy import DCSelectionPolicy
+from dc_selection.DCSelectionPolicy import DCSelectionPolicy
 
 
 class DCSelectionPolicyFirstFit(DCSelectionPolicy):

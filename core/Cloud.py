@@ -6,7 +6,7 @@ Licence:        GPL - https://www.gnu.org/copyleft/gpl.html
 Copyright (c) 2022-2023, Amirkabir University of Technology, Iran
 """
 
-import logging
+from logger import log_me
 
 
 class Cloud:
@@ -42,19 +42,18 @@ class Cloud:
     def start_run(self, env, sim_time):
         self._env = env
         self._sim_time = sim_time
-        logging.info(f'Cloud started at {env.now}.')
+        log_me('INFO', int(env.now), 'Cloud', 'Started')
         yield env.timeout(0)
 
     def get_dc_list(self):
         return self._dc_list
 
     def process_vm_create(self, vm):
-        logging.info(f'VM creation request for vm_id = {vm.get_id()} received at cloud at {self._env.now}.')
+        log_me('INFO', int(self._env.now), 'Cloud', 'VM creation request received', vm_id=vm.get_id())
         self._dc_tried = 0
         while self._dc_tried < len(self._dc_list):
             dc = self._dc_selection_policy.select_dc_for_vm(vm)
-            logging.info(f'VM with vm_id = {vm.get_id()} sent to datacenter_id = {dc.get_id()}'
-                         f' at {self._env.now}.')
+            log_me('INFO', int(self._env.now), 'Cloud', 'VM sent to datacenter', vm_id=vm.get_id(), dc_id=dc.get_id())
             status = dc.process_vm_create(vm)
             if status:
                 self._dc_selection_policy.accept_selection()
@@ -63,17 +62,17 @@ class Cloud:
                 self._dc_selection_policy.reject_selection()
                 self._dc_tried = self._dc_tried + 1
         if self._dc_tried == len(self._dc_list):
-            logging.warning(f'VM with vm_id = {vm.get_id()} not created on any datacenter.')
+            log_me('WARN', int(self._env.now), 'Cloud', 'VM not created on any datacenter', vm_id=vm.get_id())
             ack = {'type': 'vm_create', 'dest': 'broker', 'vm_id': vm.get_id(),
-                   'message': f'VM with vm_id = {vm.get_id()} not created on any datacenter.'}
+                   'message': f'VM creation request rejected'}
             yield self._env.process(self.send_ack(ack))
         yield self._env.timeout(0)
 
     def process_ack(self, ack):
         if ack['status'] == 'created':
-            logging.info(ack['message'])
+            log_me('INFO', int(self._env.now), 'Cloud', ack["message"])
         else:
-            logging.warning(ack['message'])
+            log_me('WARN', int(self._env.now), 'Cloud', ack["message"])
         yield self._env.timeout(0)
 
     def send_ack(self, ack):

@@ -7,21 +7,20 @@ Copyright (c) 2022-2023, Amirkabir University of Technology, Iran
 """
 
 from PyCloudSim import PyCloudSim
-from Host import Host
-from RamProvisioner import RamProvisioner
-from BwProvisioner import BwProvisioner
-from MipsProvisioner import MipsProvisioner
-from StorageProvisioner import StorageProvisioner
-from VMAllocationPolicyFirstFit import VMAllocationPolicyFirstFit
-from VMAllocationPolicyLeastMips import VMAllocationPolicyLeastMips
-from DCSelectionPolicyFirstFit import DCSelectionPolicyFirstFit
-from DCSelectionPolicyRoundRobin import DCSelectionPolicyRoundRobin
-from Datacenter import Datacenter
-from Broker import Broker
-from Cloud import Cloud
-from VM import VM
+from core.Host import Host
+from provisioner.RamProvisioner import RamProvisioner
+from provisioner.BwProvisioner import BwProvisioner
+from provisioner.MipsProvisioner import MipsProvisioner
+from provisioner.StorageProvisioner import StorageProvisioner
+from vm_allocation.VMAllocationPolicyLeastMips import VMAllocationPolicyLeastMips
+from dc_selection.DCSelectionPolicyRoundRobin import DCSelectionPolicyRoundRobin
+from core.Datacenter import Datacenter
+from core.Broker import Broker
+from core.Cloud import Cloud
+from core.VM import VM
 from csv import DictReader
 import logging
+from logger import enable_logging
 
 
 def create_vms() -> list[VM]:
@@ -125,16 +124,6 @@ def create_cloud(dc_list: list[Datacenter]) -> Cloud:
     return Cloud(cloud_attributes, dc_list, dc_selection_policy)
 
 
-def enable_logging():
-    """Enable logging"""
-    logging.basicConfig(
-        level=logging.INFO,
-        format='%(asctime)s - [%(levelname)s]: %(message)s',
-        filename='simulation.log', filemode="w")  # pass explicit filename here
-    logging.getLogger().addHandler(logging.StreamHandler())
-    logging.info('Logging enabled')
-
-
 if __name__ == '__main__':
     enable_logging()
     logging.info(f'Initializing PyCloudSim...')
@@ -161,4 +150,3 @@ if __name__ == '__main__':
 
     # 5) Stop the simulation and finalize Results
     sim.stop_simulation()
-

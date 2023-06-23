@@ -8,7 +8,7 @@ Copyright (c) 2022-2023, Amirkabir University of Technology, Iran
 
 
 from simpy.util import start_delayed
-import logging
+from logger import log_me
 
 
 class Broker:
@@ -66,7 +66,7 @@ class Broker:
         """
         self._env = env
         self._sim_time = sim_time
-        logging.info(f'Broker started at {env.now}.')
+        log_me('INFO', int(env.now), 'Broker', 'Started')
         for vm in self._vm_list:
             vm_delay = vm.get_arrival_time() - env.now
             request = {'dest': 'cloud', 'type': 'vm_create', 'vm': vm}
@@ -75,7 +75,7 @@ class Broker:
                 yield env.process(self.send_request(request))
             else:
                 yield start_delayed(env, self.send_request(request), delay=vm_delay)
-        logging.info(f'Broker stopped at {env.now}.')
+        log_me('INFO', int(env.now), 'Broker', 'Stopped')
 
     def send_request(self, request):
         """ Sending request (VM creation, etc.) to Cloud/Datacenters
@@ -83,11 +83,10 @@ class Broker:
         """
         if request['type'] == 'vm_create' and request['dest'] == 'cloud':
             vm = request['vm']
-            logging.info(f'VM creation request with vm_id = {vm.get_id()} sent to cloud at {self._env.now}.')
+            log_me('INFO', int(self._env.now), 'Broker', 'VM creation request sent to cloud', vm_id=vm.get_id())
             yield self._env.process(self._cloud.process_vm_create(vm))
 
     def process_ack(self, ack):
-        print('I am broker, receiving ack from cloud! yoohoo')
         # Todo: should do somthing with the ack, for example count created/not created VMs
-        logging.info(ack['message'])
+        log_me('INFO', int(self._env.now), 'Broker', ack['message'], vm_id=ack['vm_id'])
         yield self._env.timeout(0)

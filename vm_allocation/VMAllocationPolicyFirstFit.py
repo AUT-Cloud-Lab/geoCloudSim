@@ -6,13 +6,13 @@ Licence:        GPL - https://www.gnu.org/copyleft/gpl.html
 Copyright (c) 2022-2023, Amirkabir University of Technology, Iran
 """
 import logging
-from VMAllocationPolicy import VMAllocationPolicy
-from heapq import heappush, heappop
+
+from vm_allocation.VMAllocationPolicy import VMAllocationPolicy
 
 
-class VMAllocationPolicyLeastMips(VMAllocationPolicy):
-    """ The VMAllocationPolicyLeastMips class definition: This policy tries to allocate a host with enough capacity,
-    but with the least Mips available for the VM
+class VMAllocationPolicyFirstFit(VMAllocationPolicy):
+    """ The VMAllocationPolicyFirstFit class definition: This policy tries to allocate the first host that has enough
+    capacity for the VM
     :ivar _host_list: a list of all hosts within a data center
     :type _host_list: list[Host]
     :ivar _vm_table: a dictionary that stores the mapping of VMs' UID to hosts
@@ -23,21 +23,12 @@ class VMAllocationPolicyLeastMips(VMAllocationPolicy):
         self._vm_table = dict()
 
     def allocate_host_for_vm(self, vm):
-        suitable_hosts = []
         for host in self.get_host_list():
             if host.is_suitable_for_vm(vm):
-                suitable_hosts.append(host)
-        if not suitable_hosts:
-            logging.warning(f'No suitable host for vm with vm_id = {vm.get_id()}.')
-            return False
-        heap_mips = []
-        for host in suitable_hosts:
-            heappush(heap_mips, (host.get_available_mips(), host.get_id(), host))
-        for i in range(len(heap_mips)):
-            host = heappop(heap_mips)[2]
-            if host.vm_create(vm):
-                self._vm_table[vm.get_vm_uid()] = host
-                return True
+                if host.vm_create(vm):
+                    self._vm_table[vm.get_vm_uid()] = host
+                    return True
+        # logging.warning(f'No suitable host for vm with vm_id = {vm.get_id()}.')
         return False
 
     def optimize_allocation(self, vm_list):

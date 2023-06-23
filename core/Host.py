@@ -7,7 +7,7 @@ Copyright (c) 2022-2023, Amirkabir University of Technology, Iran
 """
 
 import math
-
+import logging
 
 class Host:
     """ A host (server) is a physical machine inside a data center that can host virtual machines (VMs).
@@ -50,19 +50,19 @@ class Host:
 
     def vm_create(self, vm):
         if not self.get_bw_provisioner().allocate_bw_for_vm(vm, vm.get_bw()):
-            print(f'Allocation of VM # {vm.get_vm_id()} to Host # {self.get_id()} failed by BW')
+            logging.warning(f'Allocation of VM # {vm.get_vm_id()} to Host # {self.get_id()} failed by BW')
             return False
         if not self.get_ram_provisioner().allocate_ram_for_vm(vm, vm.get_ram()):
-            print(f'Allocation of VM # {vm.get_vm_id()} to Host # {self.get_id()} failed by RAM')
+            logging.warning(f'Allocation of VM # {vm.get_vm_id()} to Host # {self.get_id()} failed by RAM')
             self.get_bw_provisioner().deallocate_bw_for_vm(vm)
             return False
         if not self.get_mips_provisioner().allocate_mips_for_vm(vm, vm.get_mips()):
-            print(f'Allocation of VM # {vm.get_vm_id()} to Host # {self.get_id()} failed by MIPS')
+            logging.warning(f'Allocation of VM # {vm.get_vm_id()} to Host # {self.get_id()} failed by MIPS')
             self.get_bw_provisioner().deallocate_bw_for_vm(vm)
             self.get_ram_provisioner().deallocate_ram_for_vm(vm)
             return False
         if not self.get_storage_provisioner().allocate_storage_for_vm(vm, vm.get_storage()):
-            print(f'Allocation of VM # {vm.get_vm_id()} to Host # {self.get_id()} failed by Storage')
+            logging.warning(f'Allocation of VM # {vm.get_vm_id()} to Host # {self.get_id()} failed by Storage')
             self.get_bw_provisioner().deallocate_bw_for_vm(vm)
             self.get_ram_provisioner().deallocate_ram_for_vm(vm)
             self.get_mips_provisioner().deallocate_mips_for_vm(vm)
