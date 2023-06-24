@@ -9,6 +9,7 @@ Copyright (c) 2022-2023, Amirkabir University of Technology, Iran
 import math
 import logging
 
+
 class Host:
     """ A host (server) is a physical machine inside a data center that can host virtual machines (VMs).
     It provisions RAM, MIPS, Storage and BW for its VMs via its VM allocation policy
@@ -27,6 +28,7 @@ class Host:
     :ivar _datacenter: a datacenter instance that this host belongs to
     :type _datacenter: Datacenter
     """
+
     def __init__(self, host_id, ram_provisioner, bw_provisioner, storage_provisioner, mips_provisioner):
         self._host_id = host_id
         self._ram_provisioner = ram_provisioner
@@ -35,12 +37,6 @@ class Host:
         self._mips_provisioner = mips_provisioner
         self._vm_list = []
         self._datacenter = None
-
-    def update_vms_processing(self, current_time):
-        current_time = [vm.update_vm_processing(current_time, self.get_mips_provisioner().get_allocated_mips_for_vm(vm))
-                        for vm in self.get_vm_list()]
-        current_time = [math.inf if i < 0 else i for i in current_time]
-        return min(current_time)
 
     def is_suitable_for_vm(self, vm):
         return self.get_mips_provisioner().is_suitable_for_vm(vm, vm.get_mips()) and \
@@ -67,7 +63,6 @@ class Host:
             self.get_ram_provisioner().deallocate_ram_for_vm(vm)
             self.get_mips_provisioner().deallocate_mips_for_vm(vm)
             return False
-
         self._vm_list.append(vm)
         vm.set_host(self)
         return True

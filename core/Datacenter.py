@@ -51,7 +51,7 @@ class Datacenter:
     :type _cloud: Cloud
     """
 
-    def __init__(self, dc_id, datacenter_attributes, vm_allocation_policy, scheduling_interval, host_list):
+    def __init__(self, dc_id, datacenter_attributes, vm_allocation_policy, host_list):
         self._env = None
         self._sim_time = None
         self._arch = datacenter_attributes['arch']
@@ -64,8 +64,6 @@ class Datacenter:
         self._cost_per_storage = datacenter_attributes['cost_per_storage']
         self._datacenter_id = dc_id
         self._vm_allocation_policy = vm_allocation_policy
-        self._scheduling_interval = scheduling_interval
-        self._last_process_time = 0
         self._vm_list = []
         self._host_list = host_list
         self._cloud = None
