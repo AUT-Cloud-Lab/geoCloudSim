@@ -60,7 +60,7 @@ def create_vms_from_file(vm_file: str) -> list[VM]:
             vm_dict = DictReader(vm_file)
             for row in vm_dict:
                 vm_list.append(VM(row['vm_id'], row['user_id'], float(row['mips']), float(row['ram']), float(row['bw']),
-                                  float(row['storage']), row['vmm'], float(row['arrival_time']),
+                                  float(row['storage']), float(row['arrival_time']),
                                   float(row['duration'])))
     except Exception as err:
         logging.error(f'Unable to import VMs from file. Unexpected {err=}, {type(err)=}')
@@ -132,7 +132,7 @@ if __name__ == '__main__':
     cloud = create_cloud(datacenters)
 
     # 2) Create VM(s) either manually or from a file
-    vms = create_vms_from_file('vms.csv')
+    vms = create_vms_from_file('csv/vms_test.csv')
     # vms = create_vms()
 
     # 3) Create a Broker and submit VMs to it

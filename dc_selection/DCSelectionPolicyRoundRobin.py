@@ -13,7 +13,7 @@ class DCSelectionPolicyRoundRobin(DCSelectionPolicy):
     def __init__(self, datacenter_list):
         super().__init__(datacenter_list)
         self._vm_table = dict()
-        self._last_selected = 1
+        self._last_selected = len(datacenter_list)-1
 
     def select_dc_for_vm(self, vm):
         return self._datacenter_list[(self._last_selected+1) % len(self._datacenter_list)]

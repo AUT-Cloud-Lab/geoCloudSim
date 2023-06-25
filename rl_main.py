@@ -117,12 +117,9 @@ def create_datacenter_from_file(dc_file: str, pue_file: str, br_cost_file: str, 
             pue_list = list(reader(pue_file))
             br_cost_list = list(reader(br_cost_file))
             solar_list = list(reader(solar_file))
-            host_id_start = dict()
             for row in dc_dict:
                 host_list = []
-                if row['dc_id'] not in host_id_start:
-                    host_id_start[row['dc_id']] = 0
-                for host_id in range(host_id_start[row['dc_id']], host_id_start[row['dc_id']]+int(row['num_host'])):
+                for host_id in range(int(row['num_host'])):
                     ram_provisioner = RamProvisioner(float(row['ram']))
                     mips_provisioner = MipsProvisioner(float(row['mips']))
                     storage_provisioner = StorageProvisioner(float(row['storage']))
@@ -148,7 +145,7 @@ def create_datacenter_from_file(dc_file: str, pue_file: str, br_cost_file: str, 
                         case default:
                             raise ValueError('VM allocation policy not implemented')
                     dc_list_dict[row['dc_id']] = [host_list, dc_attributes, dc_power_traces, vm_allocation_policy]
-                host_id_start[row['dc_id']] += len(host_list)
+
             for key, value in dc_list_dict.items():
                 dc_list.append(
                     PowerDatacenter(key, value[1], value[2], value[3], value[0]))

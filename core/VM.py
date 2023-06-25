@@ -32,8 +32,6 @@ class VM:
     :type _current_allocated_storage: int
     :ivar _current_allocated_bw: VM allocated bandwidth
     :type _current_allocated_bw: int
-    :ivar _vmm: VM Virtual Manager
-    :type _vmm: str
     :ivar _arrival_time: arrival time of VM
     :type _arrival_time: int
     :ivar _duration: duration of VM
@@ -41,7 +39,7 @@ class VM:
     :ivar _host: the host that the VM allocated to
     :type _host: Host
     """
-    def __init__(self, vm_id, user_id, mips, ram, bw, storage, vmm, arrival_time, duration):
+    def __init__(self, vm_id, user_id, mips, ram, bw, storage, arrival_time, duration):
         self._vm_id = vm_id
         self._user_id = user_id
         self._vm_uid = str(user_id) + '-' + str(vm_id)
@@ -49,7 +47,6 @@ class VM:
         self._ram = ram
         self._bw = bw
         self._storage = storage
-        self._vmm = vmm
         self._arrival_time = arrival_time
         self._duration = duration
         self._current_allocated_bw = 0
@@ -99,12 +96,6 @@ class VM:
 
     def set_storage(self, storage):
         self._storage = storage
-
-    def get_vmm(self):
-        return self._vmm
-
-    def set_vmm(self, vmm):
-        self._vmm = vmm
 
     def get_current_allocated_bw(self):
         return self._current_allocated_bw

@@ -18,16 +18,16 @@ class PowerHost(Host):
     # def get_energy(self, from_util, to_util, time):
     #     return time * (self.get_power(from_util) + self.get_power(to_util))/2
     def get_mips_util(self):
-        return (self.get_mips() - self.get_available_mips()) / self.get_mips() if self.get_mips() != 0 else 0
+        return round((self.get_mips() - self.get_available_mips()) / self.get_mips(), 2) if self.get_mips() != 0 else 0
 
     def get_ram_util(self):
-        return (self.get_ram() - self.get_available_ram()) / self.get_ram() if self.get_ram() != 0 else 0
+        return round((self.get_ram() - self.get_available_ram()) / self.get_ram(), 2) if self.get_ram() != 0 else 0
 
     def get_bw_util(self):
-        return (self.get_bw() - self.get_available_bw()) / self.get_bw() if self.get_bw() != 0 else 0
+        return round((self.get_bw() - self.get_available_bw()) / self.get_bw(), 2) if self.get_bw() != 0 else 0
 
     def get_storage_util(self):
-        return (self.get_storage() - self.get_available_storage()) / self.get_storage() if self.get_storage() != 0 else 0
+        return round((self.get_storage() - self.get_available_storage()) / self.get_storage(), 2) if self.get_storage() != 0 else 0
 
     def vm_create(self, vm):
         if not self.get_bw_provisioner().allocate_bw_for_vm(vm, vm.get_bw()):
