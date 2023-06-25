@@ -98,6 +98,7 @@ class Datacenter:
         result = self._vm_allocation_policy.allocate_host_for_vm(vm)
         if result:
             start_delayed(self._env, self.process_vm_destroy(vm), delay=vm.get_duration())
+            self._vm_list.append(vm.get_vm_uid())
             log_me('INFO', int(self._env.now), 'Datacenter', 'VM created and allocated', vm.get_id(), self._datacenter_id, vm.get_host().get_id())
         else:
             log_me('WARN', int(self._env.now), 'Datacenter', 'VM not created', vm.get_id(), self._datacenter_id)
@@ -106,6 +107,7 @@ class Datacenter:
     def process_vm_destroy(self, vm):
         log_me('INFO', int(self._env.now), 'Datacenter', 'VM destroy request received', vm.get_id(), self._datacenter_id)
         self._vm_allocation_policy.deallocate_host_for_vm(vm)
+        self._vm_list.remove(vm.get_vm_uid())
         log_me('INFO', int(self._env.now), 'Datacenter', 'VM destroyed', vm.get_id(), self._datacenter_id)
         yield self._env.timeout(0)
 
