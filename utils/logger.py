@@ -1,12 +1,12 @@
 import logging
 from Config import Config as conf
 
-def enable_logging():
+def enable_logging(log_file):
     """Enable logging"""
     logging.basicConfig(
         level=logging.INFO,
         format='%(asctime)s - [%(levelname)10s]: %(message)6s',
-        filename=conf.vm_file.replace('csv', 'log'), filemode="w")  # pass explicit filename here
+        filename=log_file, filemode="w")  # pass explicit filename here
     logging.getLogger().addHandler(logging.StreamHandler())
     logging.info('Logging enabled')
 
