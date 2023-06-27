@@ -8,7 +8,7 @@ Copyright (c) 2022-2023, Amirkabir University of Technology, Iran
 
 
 from simpy.util import start_delayed
-from logger import log_me
+from utils.logger import log_me
 
 
 class Broker:

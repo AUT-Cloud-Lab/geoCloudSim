@@ -20,7 +20,7 @@ from core.Cloud import Cloud
 from core.VM import VM
 from csv import DictReader
 import logging
-from logger import enable_logging
+from utils.logger import enable_logging
 
 
 def create_vms() -> list[VM]:

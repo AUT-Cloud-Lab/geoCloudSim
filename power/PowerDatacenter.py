@@ -1,5 +1,5 @@
 from core.Datacenter import Datacenter
-from logger import log_me
+from utils.logger import log_me
 from simpy.util import start_delayed
 
 
@@ -41,3 +41,5 @@ class PowerDatacenter(Datacenter):
             self._power += host.get_power()
         self._power = round(self._power * float(self._power_traces['pue'][int(self._env.now)]), 2)
 
+    def get_power(self):
+        return self._power

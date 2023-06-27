@@ -8,8 +8,7 @@ Copyright (c) 2022-2023, Amirkabir University of Technology, Iran
 
 import simpy
 from simpy.util import start_delayed
-import logging
-from logger import log_me
+from utils.logger import log_me
 
 
 class Datacenter:

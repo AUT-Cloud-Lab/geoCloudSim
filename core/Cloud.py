@@ -6,7 +6,7 @@ Licence:        GPL - https://www.gnu.org/copyleft/gpl.html
 Copyright (c) 2022-2023, Amirkabir University of Technology, Iran
 """
 
-from logger import log_me
+from utils.logger import log_me
 
 
 class Cloud:

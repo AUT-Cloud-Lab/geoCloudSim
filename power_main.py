@@ -8,7 +8,8 @@ Copyright (c) 2022-2023, Amirkabir University of Technology, Iran
 
 import logging
 from csv import DictReader, reader
-
+from utils.parser import parse
+from utils.plotter import plot_results
 from Config import Config as conf
 from PyCloudSim import PyCloudSim
 from core.Broker import Broker
@@ -16,7 +17,7 @@ from core.Cloud import Cloud
 from core.VM import VM
 from dc_selection.DCSelectionPolicyFirstFit import DCSelectionPolicyFirstFit
 from dc_selection.DCSelectionPolicyRoundRobin import DCSelectionPolicyRoundRobin
-from logger import enable_logging
+from utils.logger import enable_logging
 from power.PowerDatacenter import PowerDatacenter
 from power.PowerHost import PowerHost
 from power.models.PowerModelLinear import PowerModelLinear
@@ -189,7 +190,7 @@ def create_cloud(dc_list: list[PowerDatacenter]) -> Cloud:
 
 if __name__ == '__main__':
     if conf.enable_log:
-        enable_logging()
+        enable_logging(conf.vm_file.replace('csv', 'log'))
         logging.info(f'Initializing PyCloudSim...')
 
     # 1) Create Datacenter(s) and Cloud
@@ -214,3 +215,8 @@ if __name__ == '__main__':
 
     # 5) Stop the simulation and finalize Results
     sim.stop_simulation()
+
+    # 6) Plot the results
+    power_readings, num_vms, num_rejected = parse(conf.vm_file.replace('csv', 'log'))
+    plot_results(power_readings, num_vms, num_rejected)
+

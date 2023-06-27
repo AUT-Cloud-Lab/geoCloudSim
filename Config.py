@@ -6,7 +6,7 @@ class Config:
     # broker
 
     # cloud
-    dc_selection_policy = 'RoundRobin'
+    dc_selection_policy = 'PPO'
     # num_dcs = 2  # number of datacenters
 
     # datacenter
@@ -32,7 +32,17 @@ class Config:
     # mips_pr, ram_pr, bw_pr, storage_pr = 0.7, 0.26, 0.04, 0
 
     # workload
-    vm_file = 'csv/vms_HighDuration_1.csv'
+    # vm_file = 'csv/vms_HighDuration_1.csv'
+    vm_file = 'csv/vms_test.csv'
 
     # miscellaneous
     eps = 1e-3
+
+    # RL
+    penalty = 10000
+    discount = 0.99
+    learn_rate = 3e-4
+    num_epi = 60
+    batch_size = 64
+    memory = 30000
+    horizon = 10
