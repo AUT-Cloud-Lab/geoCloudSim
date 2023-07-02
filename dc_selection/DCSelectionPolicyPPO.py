@@ -26,8 +26,15 @@ class DCSelectionPolicyPPO(DCSelectionPolicy):
         if int(vm.get_id()) == 100:
             self._terminal = True
         # states = [dc.get_power() for dc in self._datacenter_list]
-        states = [dc.get_brown_cost(5) for dc in self._datacenter_list]
-        self._pre_costs = states
+        states_cost = [dc.get_brown_cost(5) for dc in self._datacenter_list]
+        states_br = [dc.get_br_price() for dc in self._datacenter_list]
+        states_gr = [dc.get_green() for dc in self._datacenter_list]
+        states_pue = [dc.get_pue() for dc in self._datacenter_list]
+        self._pre_costs = states_cost
+        states = states_cost
+        states.extend(states_br)
+        states.extend(states_gr)
+        states.extend(states_pue)
         action = self._agent.act(states=states, independent=self._evaluation)
         log('INFO', -1, f'action = {action}')
         return self._datacenter_list[action]

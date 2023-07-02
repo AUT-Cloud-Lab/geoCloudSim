@@ -7,7 +7,7 @@ class Config:
     # broker
 
     # cloud
-    dc_selection_policy = 'RoundRobin'
+    dc_selection_policy = 'PPO'
     # num_dcs = 2  # number of datacenters
 
     # datacenter

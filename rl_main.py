@@ -19,7 +19,7 @@ def init_rl():
     agent = Agent.create(
         agent='ppo',
         # Automatically configured network
-        states=dict(type="float", shape=(4,)),
+        states=dict(type="float", shape=(16,)),
         actions=dict(type="int", shape=(), num_values=4),
         max_episode_timesteps=10000,
         network='auto',
@@ -95,11 +95,11 @@ if __name__ == '__main__':
         log('INFO', 0, f'Initializing PyCloudSim...')
 
     # 1) Create Datacenter(s) and Cloud
-    datacenters = create_datacenter_from_file(conf.dc_file, conf.pue_file, conf.br_cost_file, conf.solar_file)
+    datacenters = create_power_datacenter_from_file(conf.dc_file, conf.pue_file, conf.br_cost_file, conf.solar_file)
     cloud = create_cloud(datacenters, agent, evaluation=True)
 
     # 2) Create VM(s) either manually or from a file
-    vms = create_vms_from_file(eval_vm_file)
+    vms = create_vms(eval_vm_file)
     # vms = create_vms()
 
     # 3) Create a Broker and submit VMs to it

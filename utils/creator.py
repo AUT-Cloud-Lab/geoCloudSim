@@ -104,13 +104,19 @@ def create_power_datacenter() -> list[PowerDatacenter]:
     :rtype: list[Datacenter]
     """
     dc_list = []
-    num_hosts = conf.num_hosts
-    num_dcs = conf.num_dcs
-    log('INFO', 0, f'Creating {num_dcs} datacenters, each with {num_hosts} hosts.')
-    # adding some homogeneous hosts
-    mips, ram, bw, storage = conf.mips, conf.ram, conf.bw, conf.storage
-    max_power, stat_power = conf.max_power, conf.stat_power
-    mips_power_ratio, ram_power_ratio, bw_power_ratio, storage_power_ratio = conf.mips_pr, conf.ram_pr, conf.bw_pr, conf.storage_pr
+    try:
+        num_hosts = conf.num_hosts
+        num_dcs = conf.num_dcs
+        log('INFO', 0, f'Creating {num_dcs} datacenters, each with {num_hosts} hosts.')
+        # adding some homogeneous hosts
+        mips, ram, bw, storage = conf.mips, conf.ram, conf.bw, conf.storage
+        max_power, stat_power = conf.max_power, conf.stat_power
+        mips_power_ratio, ram_power_ratio, bw_power_ratio, storage_power_ratio = conf.mips_pr, conf.ram_pr, conf.bw_pr, conf.storage_pr
+        datacenter_attributes = conf.dc_attributes
+        vm_allocation_policy = conf.vm_allocation_policy
+    except Exception as err:
+        log('ERROR', 0, f'Incomplete config file. Unexpected {err=}, {type(err)=}')
+        raise Exception(f'Incomplete config file. Unexpected {err=}, {type(err)=}')
     for dc_id in range(num_dcs):
         host_list = []
         for host_id in range(num_hosts):
@@ -122,8 +128,7 @@ def create_power_datacenter() -> list[PowerDatacenter]:
                                            bw_power_ratio, storage_power_ratio)
             host_list.append(
                 PowerHost(host_id, ram_provisioner, bw_provisioner, storage_provisioner, mips_provisioner, power_model))
-        datacenter_attributes = conf.dc_attributes
-        match conf.vm_allocation_policy:
+        match vm_allocation_policy:
             case 'FirstFit':
                 vm_allocation_policy = VMAllocationPolicyFirstFit(host_list)
             case 'LeastMips':
@@ -225,5 +230,5 @@ def create_cloud(dc_list: list[PowerDatacenter], agent: Agent = None, evaluation
         case 'LeastCost':
             dc_selection_policy = DCSelectionPolicyLeastCost(dc_list)
         case _:
-            raise ValueError('dc selection policy not implemented')
+            raise ValueError('DC selection policy not implemented')
     return Cloud(cloud_attributes, dc_list, dc_selection_policy)

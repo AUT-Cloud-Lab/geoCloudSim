@@ -86,3 +86,14 @@ class PowerDatacenter(Datacenter):
     def get_power_all(self):
         return self._power_all
 
+    def get_br_price(self):
+        now = int(self._env.now)
+        return self._br_cost[now]
+
+    def get_green(self):
+        now = int(self._env.now)
+        return self._green[now]
+
+    def get_pue(self):
+        now = int(self._env.now)
+        return self._pue[now]
