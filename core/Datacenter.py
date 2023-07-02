@@ -55,7 +55,6 @@ class Datacenter:
         self._sim_time = None
         self._arch = datacenter_attributes['arch']
         self._os = datacenter_attributes['os']
-        self._vmm = datacenter_attributes['vmm']
         self._time_zone = datacenter_attributes['time_zone']
         self._cost_per_mips = datacenter_attributes['cost_per_mips']
         self._cost_per_ram = datacenter_attributes['cost_per_ram']

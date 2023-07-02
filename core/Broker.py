@@ -67,8 +67,10 @@ class Broker:
         self._env = env
         self._sim_time = sim_time
         log_me('INFO', int(env.now), 'Broker', 'Started')
-        for vm in self._vm_list:
+        vm_list = sorted(self._vm_list, key=lambda obj: obj.get_arrival_time())
+        for vm in vm_list:
             vm_delay = vm.get_arrival_time() - env.now
+            assert(vm_delay >= 0)
             request = {'dest': 'cloud', 'type': 'vm_create', 'vm': vm}
             if vm_delay == 0:
                 # TODO maybe sending interrupt be better than creating process

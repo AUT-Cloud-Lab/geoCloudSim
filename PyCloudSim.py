@@ -9,6 +9,8 @@ Copyright (c) 2022-2023, Amirkabir University of Technology, Iran
 import simpy
 import logging
 
+from utils.logger import log
+
 
 class PyCloudSim(object):
     """
@@ -26,7 +28,7 @@ class PyCloudSim(object):
     """
 
     def __init__(self, sim_time, broker, cloud, vm_list):
-        logging.info(f'Creating PyCloudSim environment.')
+        log('INFO', 0, f'Creating PyCloudSim environment.')
         if isinstance(sim_time, int) and sim_time > 0:
             self._sim_time = sim_time
         else:
@@ -53,12 +55,12 @@ class PyCloudSim(object):
         self._env = env
 
     def start_simulation(self):
-        logging.info(f'Starting simulation.')
+        log('INFO', 0, f'Starting simulation.')
         self.get_env().run(until=self.get_sim_time())
 
     def stop_simulation(self):
-        logging.info('Simulation Finished.')
-        cost = [dc.get_brown_cost() for dc in self._datacenter_list]
-        logging.info(f'Total cost of all datacenters = {sum(cost)}')
+        log('INFO', int(self._env.now), 'Simulation Finished.')
+        cost = [dc.get_brown_cost() for dc in self._datacenter_list if callable(getattr(dc, 'get_brown_cost', None))]
+        log('STAT', int(self._env.now), f'Total cost of all datacenters = {sum(cost)}')
 
 

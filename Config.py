@@ -2,12 +2,12 @@ class Config:
     # simulator
     sim_time = 10000
     enable_log = True
-    verbose = False
+    verbose = True
 
     # broker
 
     # cloud
-    dc_selection_policy = 'PPO'
+    dc_selection_policy = 'RoundRobin'
     # num_dcs = 2  # number of datacenters
 
     # datacenter
