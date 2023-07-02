@@ -19,13 +19,22 @@ def log_me(kind, time, sender, message, vm_id=None, dc_id=None, host_id=None):
             f'[vm_id:{vm_id}]' if vm_id is not None else '').ljust(15) + (
                   f'[dc_id: {dc_id}]' if dc_id is not None else '').ljust(15) + (
                   f'[host_id: {host_id}]' if host_id is not None else '').ljust(15)
+        if kind == 'STAT':
+            logging.info(msg)
+        if kind == 'INFO' and conf.verbose:
+            logging.info(msg)
+        if kind == 'WARN':
+            logging.warning(msg)
+        if kind == 'DEBUG' and conf.verbose:
+            logging.debug(msg)
+
+
+def log(kind, time, msg):
+    if conf.enable_log:
+        msg = f'[{time}]'.ljust(8) + msg
         if kind == 'INFO':
             logging.info(msg)
         if kind == 'WARN':
             logging.warning(msg)
         if kind == 'DEBUG':
             logging.debug(msg)
-
-
-def log_rl(msg):
-    logging.info(msg)

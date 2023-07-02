@@ -88,5 +88,5 @@ class Broker:
 
     def process_ack(self, ack):
         # Todo: should do somthing with the ack, for example count created/not created VMs
-        log_me('INFO', int(self._env.now), 'Broker', ack['message'], vm_id=ack['vm_id'])
+        log_me(ack['kind'], int(self._env.now), 'Broker', ack['message'], vm_id=ack['vm_id'])
         yield self._env.timeout(0)

@@ -58,4 +58,7 @@ class PyCloudSim(object):
 
     def stop_simulation(self):
         logging.info('Simulation Finished.')
+        cost = [dc.get_brown_cost() for dc in self._datacenter_list]
+        logging.info(f'Total cost of all datacenters = {sum(cost)}')
+
 

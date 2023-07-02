@@ -64,15 +64,12 @@ class Cloud:
         if self._dc_tried == len(self._dc_list):
             log_me('WARN', int(self._env.now), 'Cloud', 'VM not created on any datacenter', vm_id=vm.get_id())
             ack = {'type': 'vm_create', 'dest': 'broker', 'vm_id': vm.get_id(),
-                   'message': f'VM creation request rejected'}
+                   'message': f'VM creation request rejected', 'kind': 'WARN'}
             yield self._env.process(self.send_ack(ack))
         yield self._env.timeout(0)
 
     def process_ack(self, ack):
-        if ack['status'] == 'created':
-            log_me('INFO', int(self._env.now), 'Cloud', ack["message"])
-        else:
-            log_me('WARN', int(self._env.now), 'Cloud', ack["message"])
+        log_me(ack['kind'], int(self._env.now), 'Cloud', ack["message"])
         yield self._env.timeout(0)
 
     def send_ack(self, ack):

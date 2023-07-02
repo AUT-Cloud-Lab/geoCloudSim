@@ -17,6 +17,7 @@ from PyCloudSim import PyCloudSim
 from core.Broker import Broker
 from core.Cloud import Cloud
 from core.VM import VM
+from dc_selection.DCSelectionPolicyLeastPower import DCSelectionPolicyLeastPower
 from dc_selection.DCSelectionPolicyFirstFit import DCSelectionPolicyFirstFit
 from dc_selection.DCSelectionPolicyRoundRobin import DCSelectionPolicyRoundRobin
 from dc_selection.DCSelectionPolicyPPO import DCSelectionPolicyPPO
@@ -177,12 +178,14 @@ def create_broker(cloud: Cloud) -> Broker:
     return Broker(cloud)
 
 
-def create_cloud(dc_list: list[PowerDatacenter], agent: Agent = None) -> Cloud:
+def create_cloud(dc_list: list[PowerDatacenter], agent: Agent = None, evaluation: bool = False) -> Cloud:
     """Create a cloud from the list of data centers
     :param dc_list: list of datacenters
     :type dc_list: list[Datacenter]
     :param agent: RL agent
     :type agent: RLAgent
+    :param evaluation: determines if we are in Evaluation phase or not
+    :type agent: bool
     :return: cloud
     :rtype: Cloud
     """
@@ -194,23 +197,15 @@ def create_cloud(dc_list: list[PowerDatacenter], agent: Agent = None) -> Cloud:
         case 'RoundRobin':
             dc_selection_policy = DCSelectionPolicyRoundRobin(dc_list)
         case 'PPO':
-            dc_selection_policy = DCSelectionPolicyPPO(dc_list, agent)
+            dc_selection_policy = DCSelectionPolicyPPO(dc_list, agent, evaluation)
+        case 'LeastPower':
+            dc_selection_policy = DCSelectionPolicyLeastPower(dc_list)
         case default:
             raise ValueError('dc selection policy not implemented')
     return Cloud(cloud_attributes, dc_list, dc_selection_policy)
 
 
 def init_rl():
-    pass
-
-
-if __name__ == '__main__':
-
-    # # Pre-defined or custom environment
-    # environment = Environment.create(
-    #     environment='gym', level='CartPole', max_episode_timesteps=500
-    # )
-
     # Instantiate a PPO agent
     agent = Agent.create(
         agent='ppo',
@@ -220,37 +215,49 @@ if __name__ == '__main__':
         max_episode_timesteps=10000,
         network='auto',
         # Optimization
-        batch_size=conf.batch_size, update_frequency=2, learning_rate=conf.learn_rate, subsampling_fraction=0.2,
+        batch_size=conf.batch_size, update_frequency=2, learning_rate=conf.learn_rate, subsampling_fraction=0.3,
         optimization_steps=5,
         # Reward estimation
-        likelihood_ratio_clipping=0.2, discount=conf.discount, estimate_terminal=False,
+        likelihood_ratio_clipping=0.1, discount=conf.discount, estimate_terminal=False,
         # Critic
         critic_network='auto',
         critic_optimizer=dict(optimizer='adam', multi_step=10, learning_rate=conf.learn_rate),
         # Preprocessing
         preprocessing=None,
         # Exploration
-        exploration=0.0, variable_noise=0.0,
+        exploration=0.01, variable_noise=0.0,
         # Regularization
-        l2_regularization=0.0, entropy_regularization=0.0,
+        l2_regularization=0.1, entropy_regularization=0.01,
         # TensorFlow etc
         name='agent', device=None, parallel_interactions=1, seed=None, execution=None, saver=None,
         summarizer=None, recorder=None
     )
+    return agent
 
+
+if __name__ == '__main__':
+
+    # Initialize RL
+    agent = init_rl()
+
+    train_vm_file = 'csv/vms_test.csv'
+    eval_vm_file = 'csv/vms_HighDuration_1.csv'
+    train_log_file = train_vm_file.replace('csv', 'log')
+    eval_log_file = eval_vm_file.replace('csv', 'log')
     # Train for num_epi episodes
-    for _ in range(conf.num_epi):
+    for i in range(conf.num_epi):
+        print(f'starting episode {i}')
         if conf.enable_log:
-            enable_logging(conf.vm_file.replace('csv', 'log'))
+            enable_logging(train_log_file)
             logging.info(f'Initializing PyCloudSim...')
 
         # Initialize episode
         # 1) Create Datacenter(s) and Cloud
         datacenters = create_datacenter_from_file(conf.dc_file, conf.pue_file, conf.br_cost_file, conf.solar_file)
-        cloud = create_cloud(datacenters, agent)
+        cloud = create_cloud(datacenters, agent, evaluation=False)
 
         # 2) Create VM(s) either manually or from a file
-        vms = create_vms_from_file(conf.vm_file)
+        vms = create_vms_from_file(train_vm_file)
         # vms = create_vms()
 
         # 3) Create a Broker and submit VMs to it
@@ -268,12 +275,40 @@ if __name__ == '__main__':
         # 5) Stop the simulation and finalize Results
         sim.stop_simulation()
 
-    agent.close()
-    # environment.close()
+    # 6) Plot the results
+    power_readings, num_vms, num_rejected, rewards = parse(train_log_file)
+    plot_results(power_readings, num_vms, num_rejected, agent.reward_buffers[0])
+
+
+    # Run an episode for evaluation
+
+    if conf.enable_log:
+        enable_logging(eval_log_file)
+        logging.info(f'Initializing PyCloudSim...')
+
+    # 1) Create Datacenter(s) and Cloud
+    datacenters = create_datacenter_from_file(conf.dc_file, conf.pue_file, conf.br_cost_file, conf.solar_file)
+    cloud = create_cloud(datacenters, agent, evaluation=True)
+
+    # 2) Create VM(s) either manually or from a file
+    vms = create_vms_from_file(eval_vm_file)
+    # vms = create_vms()
+
+    # 3) Create a Broker and submit VMs to it
+    broker = create_broker(cloud)
+    broker.submit_vm_list(vms)
+    cloud.set_broker(broker)
+
+    # 4) Create and initialize simulation environment and event processors
+    sim_time = conf.sim_time
+    sim = PyCloudSim(sim_time, broker, cloud, vms)
+
+    # 5) Start the simulation
+    sim.start_simulation()
+
+    # 5) Stop the simulation and finalize Results
+    sim.stop_simulation()
 
     # 6) Plot the results
-    power_readings, num_vms, num_rejected, rewards = parse(conf.vm_file.replace('csv', 'log'))
-    plot_results(power_readings, num_vms, num_rejected, agent.reward_buffers[0][0:5999])
-
-
-
+    power_readings, num_vms, num_rejected, rewards = parse(eval_log_file)
+    plot_results(power_readings, num_vms, num_rejected, agent.reward_buffers[0])

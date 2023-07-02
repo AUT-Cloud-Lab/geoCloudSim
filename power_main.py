@@ -7,17 +7,19 @@ Copyright (c) 2022-2023, Amirkabir University of Technology, Iran
 """
 
 import logging
+from Config import Config as conf
 from csv import DictReader, reader
+from utils.logger import enable_logging
 from utils.parser import parse
 from utils.plotter import plot_results
-from Config import Config as conf
 from PyCloudSim import PyCloudSim
 from core.Broker import Broker
 from core.Cloud import Cloud
 from core.VM import VM
+from dc_selection.DCSelectionPolicyLeastCost import DCSelectionPolicyLeastCost
+from dc_selection.DCSelectionPolicyLeastPower import DCSelectionPolicyLeastPower
 from dc_selection.DCSelectionPolicyFirstFit import DCSelectionPolicyFirstFit
 from dc_selection.DCSelectionPolicyRoundRobin import DCSelectionPolicyRoundRobin
-from utils.logger import enable_logging
 from power.PowerDatacenter import PowerDatacenter
 from power.PowerHost import PowerHost
 from power.models.PowerModelLinear import PowerModelLinear
@@ -25,8 +27,8 @@ from provisioner.BwProvisioner import BwProvisioner
 from provisioner.MipsProvisioner import MipsProvisioner
 from provisioner.RamProvisioner import RamProvisioner
 from provisioner.StorageProvisioner import StorageProvisioner
-from vm_allocation.VMAllocationPolicyLeastMips import VMAllocationPolicyLeastMips
 from vm_allocation.VMAllocationPolicyFirstFit import VMAllocationPolicyFirstFit
+from vm_allocation.VMAllocationPolicyLeastMips import VMAllocationPolicyLeastMips
 
 
 def create_vms() -> list[VM]:
@@ -99,15 +101,19 @@ def create_datacenter() -> list[PowerDatacenter]:
                 PowerHost(host_id, ram_provisioner, bw_provisioner, storage_provisioner, mips_provisioner, power_model))
         datacenter_attributes = conf.dc_attributes
         match conf.vm_allocation_policy:
-            case 'FirstFit': vm_allocation_policy = VMAllocationPolicyFirstFit(host_list)
-            case 'LeastMips': vm_allocation_policy = VMAllocationPolicyLeastMips(host_list)
-            case default: raise ValueError('VM allocation policy not implemented')
+            case 'FirstFit':
+                vm_allocation_policy = VMAllocationPolicyFirstFit(host_list)
+            case 'LeastMips':
+                vm_allocation_policy = VMAllocationPolicyLeastMips(host_list)
+            case default:
+                raise ValueError('VM allocation policy not implemented')
         dc_list.append(
             PowerDatacenter(dc_id, datacenter_attributes, vm_allocation_policy, host_list))
     return dc_list
 
 
-def create_datacenter_from_file(dc_file: str, pue_file: str, br_cost_file: str, solar_file: str) -> list[PowerDatacenter]:
+def create_datacenter_from_file(dc_file: str, pue_file: str, br_cost_file: str, solar_file: str) -> list[
+    PowerDatacenter]:
     logging.info(f'Importing datacenters and their hosts from file.')
     dc_list = []
     dc_list_dict = {}
@@ -123,12 +129,13 @@ def create_datacenter_from_file(dc_file: str, pue_file: str, br_cost_file: str, 
                 host_list = []
                 if row['dc_id'] not in host_id_start:
                     host_id_start[row['dc_id']] = 0
-                for host_id in range(host_id_start[row['dc_id']], host_id_start[row['dc_id']]+int(row['num_host'])):
+                for host_id in range(host_id_start[row['dc_id']], host_id_start[row['dc_id']] + int(row['num_host'])):
                     ram_provisioner = RamProvisioner(float(row['ram']))
                     mips_provisioner = MipsProvisioner(float(row['mips']))
                     storage_provisioner = StorageProvisioner(float(row['storage']))
                     bw_provisioner = BwProvisioner(float(row['bw']))
-                    power_model = PowerModelLinear(float(row['max_power']), float(row['stat_power']), float(row['mips_pr']), float(row['ram_pr']),
+                    power_model = PowerModelLinear(float(row['max_power']), float(row['stat_power']),
+                                                   float(row['mips_pr']), float(row['ram_pr']),
                                                    float(row['bw_pr']), float(row['storage_pr']))
                     host_list.append(
                         PowerHost(host_id, ram_provisioner, bw_provisioner, storage_provisioner, mips_provisioner,
@@ -138,9 +145,9 @@ def create_datacenter_from_file(dc_file: str, pue_file: str, br_cost_file: str, 
                 else:
                     dc_attributes = conf.dc_attributes
                     dc_power_traces = dict()
-                    dc_power_traces['solar'] = solar_list[int(row['dc_id'])-1]
-                    dc_power_traces['br_cost'] = br_cost_list[int(row['dc_id'])-1]
-                    dc_power_traces['pue'] = pue_list[int(row['dc_id'])-1]
+                    dc_power_traces['solar'] = solar_list[int(row['dc_id']) - 1]
+                    dc_power_traces['br_cost'] = br_cost_list[int(row['dc_id']) - 1]
+                    dc_power_traces['pue'] = pue_list[int(row['dc_id']) - 1]
                     match conf.vm_allocation_policy:
                         case 'FirstFit':
                             vm_allocation_policy = VMAllocationPolicyFirstFit(host_list)
@@ -157,6 +164,7 @@ def create_datacenter_from_file(dc_file: str, pue_file: str, br_cost_file: str, 
         logging.error(f'Unable to import datacenters from file. Unexpected {err=}, {type(err)=}')
         raise Exception(f'Unable to import datacenters from file. Unexpected {err=}, {type(err)=}')
     return dc_list
+
 
 def create_broker(cloud: Cloud) -> Broker:
     """Create a broker that submits VMs to the cloud
@@ -183,6 +191,10 @@ def create_cloud(dc_list: list[PowerDatacenter]) -> Cloud:
             dc_selection_policy = DCSelectionPolicyFirstFit(dc_list)
         case 'RoundRobin':
             dc_selection_policy = DCSelectionPolicyRoundRobin(dc_list)
+        case 'LeastPower':
+            dc_selection_policy = DCSelectionPolicyLeastPower(dc_list)
+        case 'LeastCost':
+            dc_selection_policy = DCSelectionPolicyLeastCost(dc_list)
         case default:
             raise ValueError('dc selection policy not implemented')
     return Cloud(cloud_attributes, dc_list, dc_selection_policy)
@@ -217,6 +229,5 @@ if __name__ == '__main__':
     sim.stop_simulation()
 
     # 6) Plot the results
-    power_readings, num_vms, num_rejected = parse(conf.vm_file.replace('csv', 'log'))
+    power_readings, num_vms, num_rejected, _ = parse(conf.vm_file.replace('csv', 'log'))
     plot_results(power_readings, num_vms, num_rejected)
-

@@ -2,6 +2,7 @@ class Config:
     # simulator
     sim_time = 10000
     enable_log = True
+    verbose = False
 
     # broker
 
@@ -40,9 +41,9 @@ class Config:
 
     # RL
     penalty = 10000
-    discount = 0.99
+    discount = 0.5
     learn_rate = 3e-4
-    num_epi = 60
-    batch_size = 64
-    memory = 30000
-    horizon = 10
+    num_epi = 200
+    batch_size = 32
+    memory = 10000
+    horizon = 20
