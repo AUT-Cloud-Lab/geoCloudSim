@@ -15,12 +15,11 @@ class DCSelectionPolicyPPO(DCSelectionPolicy):
     def __init__(self, datacenter_list, agent, evaluation=False):
         super().__init__(datacenter_list)
         self._vm_table = dict()
-        self._last_selected = 0
         self._agent = agent
-        self._num_rejected = 0
         self._terminal = False
         self._evaluation = evaluation
         self._pre_costs = [0]*len(datacenter_list)
+        self._action = None
 
     def select_dc_for_vm(self, vm):
         if int(vm.get_id()) == 100:
@@ -36,25 +35,25 @@ class DCSelectionPolicyPPO(DCSelectionPolicy):
         states.extend(states_gr)
         states.extend(states_pue)
         action = self._agent.act(states=states, independent=self._evaluation)
+        self._action = action
         log('INFO', -1, f'action = {action}')
         return self._datacenter_list[action]
 
     def reject_selection(self):
-        self._num_rejected += 1
         # states = [dc.get_power() for dc in self._datacenter_list]
         # reward = -(statistics.stdev(states) / statistics.mean(states))
-        costs = [dc.get_brown_cost(5) for dc in self._datacenter_list]
-        reward = - (sum(costs) - sum(self._pre_costs)) / sum(costs)
+        costs = [dc.get_brown_cost(1) for dc in self._datacenter_list]
+        # reward = - (sum(costs) - sum(self._pre_costs)) / sum(costs)
+        reward = self._pre_costs[self._action]/costs[self._action]
         log('INFO', -1, f'reward = {reward}')
         if not self._evaluation:
             self._agent.observe(terminal=self._terminal, reward=reward)
 
     def accept_selection(self):
-        self._num_rejected = 0
         # states = [dc.get_power() for dc in self._datacenter_list]
         # reward = -(statistics.stdev(states) / statistics.mean(states))
         costs = [dc.get_brown_cost(1) for dc in self._datacenter_list]
-        reward = - (sum(costs) - sum(self._pre_costs)) / sum(costs)
+        reward = self._pre_costs[self._action]/costs[self._action]
         log('INFO', -1, f'reward = {reward}')
         if not self._evaluation:
             self._agent.observe(terminal=self._terminal, reward=reward)

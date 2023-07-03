@@ -14,6 +14,19 @@ from utils.logger import enable_logging, log
 from PyCloudSim import PyCloudSim
 
 
+def predictor(pue_file: str, br_cost_file: str, solar_file: str):
+    try:
+        with open(pue_file, mode='r') as pue_file, \
+                open(br_cost_file, mode='r') as br_cost_file, open(solar_file, mode='r') as solar_file:
+            pue_list = list(reader(pue_file))
+            br_cost_list = list(reader(br_cost_file))
+            solar_list = list(reader(solar_file))
+            host_id_start = dict()
+    except Exception as err:
+        log('ERROR', 0, f'Unable to import from file. Unexpected {err=}, {type(err)=}')
+        raise Exception(f'Unable to import from file. Unexpected {err=}, {type(err)=}')
+
+
 def init_rl():
     # Instantiate a PPO agent
     agent = Agent.create(

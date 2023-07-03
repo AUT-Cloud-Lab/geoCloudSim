@@ -172,6 +172,7 @@ def create_power_datacenter_from_file(dc_file: str, pue_file: str, br_cost_file:
                     dc_list_dict[row['dc_id']][0].extend(host_list)
                 else:
                     dc_attributes = conf.dc_attributes
+                    dc_attributes['battery'] = float(row['battery'])
                     dc_power_traces = dict()
                     dc_power_traces['solar'] = solar_list[int(row['dc_id']) - 1]
                     dc_power_traces['br_cost'] = br_cost_list[int(row['dc_id']) - 1]
