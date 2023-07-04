@@ -108,6 +108,14 @@ class PowerDatacenter(Datacenter):
         # green = self._solar[st:now + 1]
         # return sum([max(0.0, (power[i] - green[i]) * br_price[i]) for i in range(len(green))])
         return sum(self._brCost_all[st:now+1])
+
+    def get_reward(self):
+        now = int(self._env.now)
+        if self._brCost_all[now] > 0:
+            return -self._brCost_all[now]
+        else:
+            return self._green_all[now]
+
     def get_power(self):
         return self._power
 
@@ -120,7 +128,8 @@ class PowerDatacenter(Datacenter):
 
     def get_green(self):
         now = int(self._env.now)
-        return self._solar[now]
+        self.update_power()
+        return self._green_all[now]
 
     def get_pue(self):
         now = int(self._env.now)

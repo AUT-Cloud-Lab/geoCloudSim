@@ -1,6 +1,8 @@
 import random
 
 from tensorforce import Agent
+
+
 from utils.logger import log
 from Config import Config as conf
 from csv import DictReader, reader
@@ -14,6 +16,7 @@ from dc_selection.DCSelectionPolicyFirstFit import DCSelectionPolicyFirstFit
 from dc_selection.DCSelectionPolicyRoundRobin import DCSelectionPolicyRoundRobin
 from dc_selection.DCSelectionPolicyPPO import DCSelectionPolicyPPO
 from dc_selection.DCSelectionPolicyLeastCost import DCSelectionPolicyLeastCost
+from dc_selection.DCSelectionPolicyMaxGreen import DCSelectionPolicyMaxGreen
 from power.PowerDatacenter import PowerDatacenter
 from power.PowerHost import PowerHost
 from power.models.PowerModelLinear import PowerModelLinear
@@ -230,6 +233,8 @@ def create_cloud(dc_list: list[PowerDatacenter], agent: Agent = None, evaluation
             dc_selection_policy = DCSelectionPolicyLeastPower(dc_list)
         case 'LeastCost':
             dc_selection_policy = DCSelectionPolicyLeastCost(dc_list)
+        case 'MaxGreen':
+            dc_selection_policy = DCSelectionPolicyMaxGreen(dc_list)
         case _:
             raise ValueError('DC selection policy not implemented')
     return Cloud(cloud_attributes, dc_list, dc_selection_policy)

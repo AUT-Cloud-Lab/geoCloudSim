@@ -30,25 +30,11 @@ class PowerHost(Host):
         return round((self.get_storage() - self.get_available_storage()) / self.get_storage(), 2) if self.get_storage() != 0 else 0
 
     def vm_create(self, vm):
-        if not self.get_bw_provisioner().allocate_bw_for_vm(vm, vm.get_bw()):
-            logging.warning(f'Allocation of VM # {vm.get_vm_id()} to Host # {self.get_id()} failed by BW')
-            return False
-        if not self.get_ram_provisioner().allocate_ram_for_vm(vm, vm.get_ram()):
-            logging.warning(f'Allocation of VM # {vm.get_vm_id()} to Host # {self.get_id()} failed by RAM')
-            self.get_bw_provisioner().deallocate_bw_for_vm(vm)
-            return False
-        if not self.get_mips_provisioner().allocate_mips_for_vm(vm, vm.get_mips()):
-            logging.warning(f'Allocation of VM # {vm.get_vm_id()} to Host # {self.get_id()} failed by MIPS')
-            self.get_bw_provisioner().deallocate_bw_for_vm(vm)
-            self.get_ram_provisioner().deallocate_ram_for_vm(vm)
-            return False
-        if not self.get_storage_provisioner().allocate_storage_for_vm(vm, vm.get_storage()):
-            logging.warning(f'Allocation of VM # {vm.get_vm_id()} to Host # {self.get_id()} failed by Storage')
-            self.get_bw_provisioner().deallocate_bw_for_vm(vm)
-            self.get_ram_provisioner().deallocate_ram_for_vm(vm)
-            self.get_mips_provisioner().deallocate_mips_for_vm(vm)
-            return False
+        status = super().vm_create(vm)
+        if status:
+            self._power = self.get_power()
+        return status
+
+    def vm_destroy(self, vm):
+        super().vm_destroy(vm)
         self._power = self.get_power()
-        self._vm_list.append(vm)
-        vm.set_host(self)
-        return True

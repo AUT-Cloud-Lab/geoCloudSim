@@ -62,6 +62,7 @@ if __name__ == '__main__':
     # Initialize RL
     agent = init_rl()
 
+    train_dc_file = 'csv/dcs_test.csv'
     train_vm_file = 'csv/vms_test.csv'
     eval_vm_file = 'csv/vms_HighDuration_1.csv'
     train_log_file = train_vm_file.replace('csv', 'log')
@@ -75,7 +76,7 @@ if __name__ == '__main__':
 
         # Initialize episode
         # 1) Create Datacenter(s) and Cloud
-        datacenters = create_power_datacenter_from_file(conf.dc_file, conf.pue_file, conf.br_cost_file, conf.solar_file)
+        datacenters = create_power_datacenter_from_file(train_dc_file, conf.pue_file, conf.br_cost_file, conf.solar_file)
         cloud = create_cloud(datacenters, agent, evaluation=False)
 
         # 2) Create VM(s) either manually or from a file
