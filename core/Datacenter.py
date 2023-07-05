@@ -114,3 +114,9 @@ class Datacenter:
 
     def get_id(self):
         return self._datacenter_id
+
+    def is_suitable_for_vm(self, vm):
+        for h in self._host_list:
+            if h.is_suitable_for_vm(vm):
+                return True
+        return False

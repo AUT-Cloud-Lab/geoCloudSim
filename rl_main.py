@@ -32,7 +32,7 @@ def init_rl():
     agent = Agent.create(
         agent='ppo',
         # Automatically configured network
-        states=dict(type="float", shape=(16,)),
+        states=dict(type="float", shape=(24,)),
         actions=dict(type="int", shape=(), num_values=4),
         max_episode_timesteps=10000,
         network='auto',

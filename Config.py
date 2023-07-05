@@ -7,7 +7,7 @@ class Config:
     # broker
 
     # cloud
-    dc_selection_policy = 'RoundRobin'
+    dc_selection_policy = 'PPO'
     # num_dcs = 2  # number of datacenters
 
     # datacenter
@@ -43,7 +43,7 @@ class Config:
     penalty = 10000
     discount = 0.5
     learn_rate = 3e-4
-    num_epi = 1
+    num_epi = 200
     batch_size = 32
     memory = 10000
     horizon = 20

@@ -109,6 +109,12 @@ class PowerDatacenter(Datacenter):
         # return sum([max(0.0, (power[i] - green[i]) * br_price[i]) for i in range(len(green))])
         return sum(self._brCost_all[st:now+1])
 
+
+    def get_max_cost(self):
+        power = 0
+        for host in self._host_list:
+            power += host.get_max_power()
+        return round(power * self.get_max_pue() * self.get_max_br_price(), 2)
     def get_reward(self):
         now = int(self._env.now)
         if self._brCost_all[now] > 0:
@@ -126,6 +132,9 @@ class PowerDatacenter(Datacenter):
         now = int(self._env.now)
         return self._br_price[now]
 
+    def get_max_br_price(self):
+        return max(self._br_price)
+
     def get_green(self):
         now = int(self._env.now)
         self.update_power()
@@ -134,3 +143,15 @@ class PowerDatacenter(Datacenter):
     def get_pue(self):
         now = int(self._env.now)
         return self._pue[now]
+
+    def get_max_pue(self):
+        return max(self._pue)
+
+    def get_battery_cap(self):
+        return self._battery
+
+    def get_avg_util(self):
+        util = 0
+        for h in self._host_list:
+            util += h.get_avg_util()
+        return util / len(self._host_list)

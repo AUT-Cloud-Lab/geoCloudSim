@@ -29,6 +29,9 @@ class PowerHost(Host):
     def get_storage_util(self):
         return round((self.get_storage() - self.get_available_storage()) / self.get_storage(), 2) if self.get_storage() != 0 else 0
 
+    def get_avg_util(self):
+        return (self.get_mips_util()+self.get_ram_util()+self.get_bw_util()+self.get_storage_util())/4
+
     def vm_create(self, vm):
         status = super().vm_create(vm)
         if status:
