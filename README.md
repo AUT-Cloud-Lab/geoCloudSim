@@ -1,8 +1,8 @@
-This is pyCloudSim, a cloud simulator written in Python. It is developed and maintained by Mahmoud Momtazpour. 
+This is geoCloudSim, a Geographically Distributed cloud simulator written in Python. It is developed and maintained by Mahmoud Momtazpour. 
 
-Inspired by CloudSim, pyCloudSim can be considered as a simplified (and a slightly different) version of it, written in Python. 
+Inspired by CloudSim, geoCloudSim can be considered as a simplified (and a slightly different) version of it that supports simulation of geographically distributed cloud and is written in Python. 
 
-Currently, it only supports IaaS service (VM allocation in a cloud data center). 
+Currently, it only supports IaaS service (VM allocation in a geo-distributed cloud data centers). 
 
 
 Its basic features are:
@@ -15,7 +15,7 @@ Its basic features are:
 
 4. Defines Resource (MIPS, RAM, BW, Storage) Privisioners to provision requested resources on hosts to VMs.
 
-To speedup the simulation, pyCloudSim uses SimPy v4.0.2, a discrete-event simulation framework. 
+To speedup the simulation, geoCloudSim uses SimPy v4.0.2, a discrete-event simulation framework. 
 
 
 
