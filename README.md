@@ -15,6 +15,8 @@ Its basic features are:
 
 4. Defines Resource (MIPS, RAM, BW, Storage) Privisioners to provision requested resources on hosts to VMs.
 
+5. Models renewable energy to simulate green cloud 
+
 To speedup the simulation, geoCloudSim uses SimPy v4.0.2, a discrete-event simulation framework. 
 
 
