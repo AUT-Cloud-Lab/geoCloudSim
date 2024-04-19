@@ -1,0 +1,4 @@
+matplotlib==3.7.2
+numpy==1.25.0
+simpy==4.1.1
+Tensorforce==0.5.5
