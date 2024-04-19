@@ -22,7 +22,7 @@ Inspired by CloudSim, geoCloudSim can be considered as a simplified (and a sligh
 6. It models renewable energy to simulate green cloud. It also supports renewable-aware DC selection and allocation policies.  
 
 ## Requirements
-To speedup the simulation, geoCloudSim uses SimPy v4.0.2, a discrete-event simulation framework. 
+To speedup the simulation, geoCloudSim uses SimPy, a discrete-event simulation framework. 
 
 ## Limitations
 Currently, it only supports IaaS service (VM allocation in a geo-distributed cloud data centers) with limited set of features described above. Cloudlets are not modeled in the current version.
@@ -51,6 +51,7 @@ venv\Scripts\activate
 # On macOS and Linux
 source venv/bin/activate
 ```
+
 ### Step 3: Clone the Repository
 Clone the repository to your local machine using the following command:
 
@@ -61,8 +62,11 @@ git clone https://github.com/AUT-Cloud-Lab/geoCloudSim.git
 ### Step 4: Install Dependencies
 Navigate to the cloned repository's directory and install the required dependencies:
 
+```bash
 cd geoCloudSim
+
 pip install -r requirements.txt
+```
 
 ### Step 5: Run the Simulator
 Now you're ready to run the simulator. But before that, you need a workload!
@@ -79,6 +83,7 @@ A vms.csv file has been included as a sample workload, containing a number of VM
 The starting point is main.py, which sets up the simulation environment and starts the simulator. The result of the simulation is logged in simulation.log.
 
 To run the simulation, execute the following command:
+
 ```bash
 python main.py
 ```
